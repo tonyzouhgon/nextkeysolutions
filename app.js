@@ -157,36 +157,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function setLanguage(language) {
-    currentLanguage = language === "es" ? "es" : "en";
-    localStorage.setItem("siteLanguage", currentLanguage);
+  function updateHelperText() {
+    const helperText = document.getElementById("serviceHelperText");
+    if (!helperText || !serviceType) return;
+    helperText.textContent = t().helper[serviceType.value] || "";
+  }
 
-    const enTexts = document.querySelectorAll(".lang.en");
-    const esTexts = document.querySelectorAll(".lang.es");
-
-    if (currentLanguage === "es") {
-      enTexts.forEach((el) => {
-        el.style.display = "none";
-      });
-      esTexts.forEach((el) => {
-        el.style.display = "inline";
-      });
-      btnEn?.classList.remove("active");
-      btnEs?.classList.add("active");
-    } else {
-      enTexts.forEach((el) => {
-        el.style.display = "inline";
-      });
-      esTexts.forEach((el) => {
-        el.style.display = "none";
-      });
-      btnEs?.classList.remove("active");
-      btnEn?.classList.add("active");
-    }
-
-    updateDynamicTexts();
-    updateHelperText();
-    updateWhatsAppButton();
+  function updateWhatsAppButton() {
+    if (!whatsappBtn) return;
+    whatsappBtn.textContent = t().buttons.whatsapp;
   }
 
   function updateDynamicTexts() {
@@ -211,9 +190,51 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSelectOptions(preferredLanguage, lang.selects.languageDefault, lang.selects.language);
   }
 
-  function updateWhatsAppButton() {
-    if (!whatsappBtn) return;
-    whatsappBtn.textContent = t().buttons.whatsapp;
+  function setLanguage(language) {
+    currentLanguage = language === "es" ? "es" : "en";
+    localStorage.setItem("siteLanguage", currentLanguage);
+
+    document.querySelectorAll(".lang.en").forEach((el) => {
+      el.style.display = currentLanguage === "en" ? "inline" : "none";
+    });
+
+    document.querySelectorAll(".lang.es").forEach((el) => {
+      el.style.display = currentLanguage === "es" ? "inline" : "none";
+    });
+
+    btnEn?.classList.toggle("active", currentLanguage === "en");
+    btnEs?.classList.toggle("active", currentLanguage === "es");
+
+    updateDynamicTexts();
+    updateHelperText();
+    updateWhatsAppButton();
+  }
+
+  function validateForm(data) {
+    const errors = [];
+    const lang = t();
+
+    if (!data.fullName.trim()) errors.push(lang.validation.fullName);
+    if (!data.phone.trim()) errors.push(lang.validation.phone);
+    if (!data.serviceType.trim()) errors.push(lang.validation.serviceType);
+    if (!data.message.trim()) errors.push(lang.validation.message);
+    if (!data.contactConsent) errors.push(lang.validation.consent);
+
+    return errors;
+  }
+
+  function setFormStatus(type) {
+    if (!formStatus) return;
+
+    formStatus.textContent = t().status[type] || "";
+
+    if (type === "success") {
+      formStatus.style.color = "green";
+    } else if (type === "sending") {
+      formStatus.style.color = "#0077ff";
+    } else {
+      formStatus.style.color = "red";
+    }
   }
 
   let previewContainer = document.getElementById("photoPreviewContainer");
@@ -271,39 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     serviceType.parentNode.appendChild(helperText);
   }
 
-  function updateHelperText() {
-    if (!helperText || !serviceType) return;
-    helperText.textContent = t().helper[serviceType.value] || "";
-  }
-
   serviceType?.addEventListener("change", updateHelperText);
-
-  function validateForm(data) {
-    const errors = [];
-    const lang = t();
-
-    if (!data.fullName.trim()) errors.push(lang.validation.fullName);
-    if (!data.phone.trim()) errors.push(lang.validation.phone);
-    if (!data.serviceType.trim()) errors.push(lang.validation.serviceType);
-    if (!data.message.trim()) errors.push(lang.validation.message);
-    if (!data.contactConsent) errors.push(lang.validation.consent);
-
-    return errors;
-  }
-
-  function setFormStatus(type) {
-    if (!formStatus) return;
-
-    formStatus.textContent = t().status[type] || "";
-
-    if (type === "success") {
-      formStatus.style.color = "green";
-    } else if (type === "sending") {
-      formStatus.style.color = "#0077ff";
-    } else {
-      formStatus.style.color = "red";
-    }
-  }
 
   serviceForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -326,7 +315,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (validationErrors.length > 0) {
       setFormStatus("validation");
-      console.warn("Validation errors:", validationErrors);
       return;
     }
 
@@ -345,9 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Failed to submit form. Status: ${response.status}`);
       }
 
-      const result = await response.text();
-      console.log("Server response:", result);
-
       setFormStatus("success");
       serviceForm.reset();
 
@@ -356,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateDynamicTexts();
       updateWhatsAppButton();
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error(error);
       setFormStatus("error");
     }
   });
@@ -381,62 +366,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setLanguage(currentLanguage);
 
-  // =========================
-  // SCROLL REVEAL SEGURO
-  // =========================
-  const revealItems = document.querySelectorAll(
-    ".service-card, .why-card, .before-after-card, .hero-card, .faq-item, .gallery-grid img"
-  );
-
-  if ("IntersectionObserver" in window && revealItems.length) {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.15
-      }
-    );
-
-    revealItems.forEach((item) => {
-      item.classList.add("reveal");
-      revealObserver.observe(item);
-    });
-  } else {
-    revealItems.forEach((item) => item.classList.add("reveal-visible"));
-  }
-
-  // =========================
-  // SMOOTH SCROLL INTERNO
-  // =========================
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-      if (!href || href === "#") return;
-
-      const target = document.querySelector(href);
-      if (!target) return;
-
-      e.preventDefault();
-
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
-  });
-
-  // =========================
-  // HEADER MÁS ELEGANTE AL BAJAR
-  // =========================
   function updateHeaderOnScroll() {
     if (!header) return;
-
     if (window.scrollY > 30) {
       header.classList.add("header-scrolled");
     } else {
@@ -447,10 +378,19 @@ document.addEventListener("DOMContentLoaded", () => {
   updateHeaderOnScroll();
   window.addEventListener("scroll", updateHeaderOnScroll);
 
-  // =========================
-  // BOTÓN WHATSAPP APARICIÓN SUAVE
-  // =========================
-  if (whatsappBtn) {
-    whatsappBtn.classList.add("floating-ready");
-  }
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  });
 });
