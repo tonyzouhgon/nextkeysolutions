@@ -992,10 +992,9 @@ body::before {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translate3d(0, 42px, 0) scale(0.98);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease;
-  filter: blur(8px);
+  opacity: 1;
+  transform: none;
+  filter: none;
 }
 
 .reveal-left {
