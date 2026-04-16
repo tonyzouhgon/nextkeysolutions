@@ -1151,3 +1151,37 @@ html {
 .hero-overlay {
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
 }
+/* FIX TEMPORAL PARA QUE TODO VUELVA A VERSE */
+.reveal,
+.hidden {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+.hero,
+.section,
+.hero-overlay,
+.service-card,
+.why-card,
+.before-after-card,
+.hero-card,
+.faq-item,
+.gallery-grid img {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.hero {
+  background: url('assets/images/hero/imagen4.jpg') center/cover no-repeat;
+  min-height: 80vh;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+body {
+  overflow-x: hidden;
+}
