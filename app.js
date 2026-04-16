@@ -4,11 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const photosInput = document.getElementById("photos");
   const serviceType = document.getElementById("serviceType");
   const preferredLanguage = document.getElementById("preferredLanguage");
+  const urgencySelect = document.getElementById("urgency");
   const btnEn = document.getElementById("lang-en");
   const btnEs = document.getElementById("lang-es");
   const whatsappBtn = document.getElementById("whatsappBtn");
   const submitBtn = document.getElementById("submitBtn");
   const header = document.querySelector(".site-header");
+  const progressBar = document.getElementById("scrollProgressBar");
+  const navLinks = Array.from(document.querySelectorAll(".main-nav a[href^='#']"));
+  const revealElements = Array.from(document.querySelectorAll(".reveal"));
+  const faqItems = Array.from(document.querySelectorAll(".faq-item"));
 
   let currentLanguage = localStorage.getItem("siteLanguage") || "en";
 
@@ -49,16 +54,18 @@ document.addEventListener("DOMContentLoaded", () => {
         whatsapp: "Chat on WhatsApp"
       },
       helper: {
-        hvac: "Please include details like: not cooling, not turning on, leaking, strange noise, or poor airflow.",
+        hvac: "Please include details like: not cooling, not turning on, leaking, strange noise, poor airflow, or thermostat issue.",
         plumbing: "Please include details like: leak location, clogged drain, toilet issue, water heater issue, or low pressure.",
         electrical: "Please include details like: outlet not working, breaker issue, flickering lights, or burning smell.",
-        handyman: "Please describe the repair, installation, or maintenance task as clearly as possible.",
-        "property-maintenance": "Please include the property name, unit number if applicable, and type of maintenance needed.",
+        handyman: "Please describe the repair, installation, assembly, or maintenance task as clearly as possible.",
+        "property-maintenance": "Please include the property name, unit number if applicable, and the type of maintenance needed.",
         general: "Please describe the issue in as much detail as possible."
       },
       validation: {
         fullName: "Full name is required.",
         phone: "Phone number is required.",
+        phoneFormat: "Please enter a valid phone number.",
+        emailFormat: "Please enter a valid email address.",
         serviceType: "Please select a service type.",
         message: "Please describe the problem.",
         consent: "You must agree to be contacted regarding your service request."
@@ -67,12 +74,17 @@ document.addEventListener("DOMContentLoaded", () => {
         sending: "Sending your request...",
         success: "Your request has been submitted successfully.",
         error: "There was a problem sending your request. Please try again.",
-        validation: "Please review the form and correct the required fields."
+        validation: "Please review the form and correct the highlighted fields."
       },
+      faq: {
+        open: "Open answer",
+        close: "Close answer"
+      },
+      stripePlaceholder:
+        "Stripe payment is not configured yet. Replace the test placeholders with your real Stripe Buy Button ID and publishable key.",
       whatsappMessage: (name, service, message, phone) =>
         `Hi, my name is ${name}. I need help with ${service}. ${message}. My phone number is ${phone}`
     },
-
     es: {
       placeholders: {
         fullName: "Tu nombre completo",
@@ -109,16 +121,18 @@ document.addEventListener("DOMContentLoaded", () => {
         whatsapp: "Chatear por WhatsApp"
       },
       helper: {
-        hvac: "Por favor incluye detalles como: no enfría, no enciende, fuga, ruido extraño o poco flujo de aire.",
+        hvac: "Por favor incluye detalles como: no enfría, no enciende, fuga, ruido extraño, poco flujo de aire o problema con el termostato.",
         plumbing: "Por favor incluye detalles como: ubicación de la fuga, drenaje tapado, problema de inodoro, calentador de agua o baja presión.",
         electrical: "Por favor incluye detalles como: contacto sin funcionar, problema de breaker, luces parpadeando o olor a quemado.",
-        handyman: "Por favor describe la reparación, instalación o tarea de mantenimiento lo más claro posible.",
+        handyman: "Por favor describe la reparación, instalación, ensamblaje o tarea de mantenimiento lo más claro posible.",
         "property-maintenance": "Por favor incluye el nombre de la propiedad, número de unidad si aplica y el tipo de mantenimiento necesario.",
         general: "Por favor describe el problema con la mayor cantidad de detalle posible."
       },
       validation: {
         fullName: "El nombre completo es obligatorio.",
         phone: "El número de teléfono es obligatorio.",
+        phoneFormat: "Por favor ingresa un número de teléfono válido.",
+        emailFormat: "Por favor ingresa un correo electrónico válido.",
         serviceType: "Por favor selecciona un tipo de servicio.",
         message: "Por favor describe el problema.",
         consent: "Debes aceptar ser contactado con respecto a tu solicitud de servicio."
@@ -127,8 +141,14 @@ document.addEventListener("DOMContentLoaded", () => {
         sending: "Enviando su solicitud...",
         success: "Su solicitud fue enviada correctamente.",
         error: "Hubo un problema al enviar su solicitud. Inténtelo de nuevo.",
-        validation: "Por favor revise el formulario y complete los campos requeridos."
+        validation: "Por favor revise el formulario y corrija los campos marcados."
       },
+      faq: {
+        open: "Abrir respuesta",
+        close: "Cerrar respuesta"
+      },
+      stripePlaceholder:
+        "Stripe aún no está configurado. Reemplaza los placeholders de prueba con tu Buy Button ID real y tu publishable key.",
       whatsappMessage: (name, service, message, phone) =>
         `Hola, mi nombre es ${name}. Necesito ayuda con ${service}. ${message}. Mi teléfono es ${phone}`
     }
@@ -136,6 +156,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function t() {
     return translations[currentLanguage] || translations.en;
+  }
+
+  function getField(id) {
+    return document.getElementById(id);
+  }
+
+  function normalizePhone(value) {
+    return value.replace(/[^\d+]/g, "").trim();
+  }
+
+  function isValidPhone(value) {
+    const cleaned = value.replace(/[^\d]/g, "");
+    return cleaned.length >= 10;
+  }
+
+  function isValidEmail(value) {
+    if (!value.trim()) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
   }
 
   function updateSelectOptions(selectElement, defaultText, valuesMap) {
@@ -152,15 +190,92 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if ([...selectElement.options].some((opt) => opt.value === currentValue)) {
+    if (Array.from(selectElement.options).some((opt) => opt.value === currentValue)) {
       selectElement.value = currentValue;
     }
   }
 
-  function updateHelperText() {
-    const helperText = document.getElementById("serviceHelperText");
-    if (!helperText || !serviceType) return;
-    helperText.textContent = t().helper[serviceType.value] || "";
+  function clearFieldError(field) {
+    if (!field) return;
+    field.classList.remove("input-error");
+
+    const existing = field.parentElement?.querySelector(".field-error");
+    if (existing) {
+      existing.remove();
+    }
+  }
+
+  function setFieldError(field, message) {
+    if (!field) return;
+    clearFieldError(field);
+    field.classList.add("input-error");
+
+    const error = document.createElement("p");
+    error.className = "field-error";
+    error.textContent = message;
+    field.parentElement?.appendChild(error);
+  }
+
+  function clearAllFieldErrors() {
+    const fields = serviceForm?.querySelectorAll("input, select, textarea") || [];
+    fields.forEach((field) => clearFieldError(field));
+  }
+
+  function validateForm(data) {
+    const errors = {};
+    const lang = t();
+
+    if (!data.fullName.trim()) {
+      errors.fullName = lang.validation.fullName;
+    }
+
+    if (!data.phone.trim()) {
+      errors.phone = lang.validation.phone;
+    } else if (!isValidPhone(data.phone)) {
+      errors.phone = lang.validation.phoneFormat;
+    }
+
+    if (data.email.trim() && !isValidEmail(data.email)) {
+      errors.email = lang.validation.emailFormat;
+    }
+
+    if (!data.serviceType.trim()) {
+      errors.serviceType = lang.validation.serviceType;
+    }
+
+    if (!data.message.trim()) {
+      errors.message = lang.validation.message;
+    }
+
+    if (!data.contactConsent) {
+      errors.contactConsent = lang.validation.consent;
+    }
+
+    return errors;
+  }
+
+  function showValidationErrors(errors) {
+    clearAllFieldErrors();
+
+    if (errors.fullName) setFieldError(getField("fullName"), errors.fullName);
+    if (errors.phone) setFieldError(getField("phone"), errors.phone);
+    if (errors.email) setFieldError(getField("email"), errors.email);
+    if (errors.serviceType) setFieldError(getField("serviceType"), errors.serviceType);
+    if (errors.message) setFieldError(getField("message"), errors.message);
+    if (errors.contactConsent) setFieldError(getField("contactConsent"), errors.contactConsent);
+  }
+
+  function setFormStatus(type) {
+    if (!formStatus) return;
+    formStatus.textContent = t().status[type] || "";
+
+    if (type === "success") {
+      formStatus.style.color = "#15803d";
+    } else if (type === "sending") {
+      formStatus.style.color = "#0077ff";
+    } else {
+      formStatus.style.color = "#dc2626";
+    }
   }
 
   function updateWhatsAppButton() {
@@ -168,15 +283,31 @@ document.addEventListener("DOMContentLoaded", () => {
     whatsappBtn.textContent = t().buttons.whatsapp;
   }
 
+  function updateHelperText() {
+    if (!serviceType) return;
+
+    let helperText = document.getElementById("serviceHelperText");
+
+    if (!helperText && serviceType.parentNode) {
+      helperText = document.createElement("p");
+      helperText.id = "serviceHelperText";
+      helperText.className = "service-helper-text";
+      serviceType.parentNode.appendChild(helperText);
+    }
+
+    if (helperText) {
+      helperText.textContent = t().helper[serviceType.value] || "";
+    }
+  }
+
   function updateDynamicTexts() {
     const lang = t();
 
-    const fullName = document.getElementById("fullName");
-    const phone = document.getElementById("phone");
-    const email = document.getElementById("email");
-    const zipCode = document.getElementById("zipCode");
-    const message = document.getElementById("message");
-    const urgency = document.getElementById("urgency");
+    const fullName = getField("fullName");
+    const phone = getField("phone");
+    const email = getField("email");
+    const zipCode = getField("zipCode");
+    const message = getField("message");
 
     if (fullName) fullName.placeholder = lang.placeholders.fullName;
     if (phone) phone.placeholder = lang.placeholders.phone;
@@ -186,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (submitBtn) submitBtn.textContent = lang.buttons.submit;
 
     updateSelectOptions(serviceType, lang.selects.serviceDefault, lang.selects.service);
-    updateSelectOptions(urgency, lang.selects.urgencyDefault, lang.selects.urgency);
+    updateSelectOptions(urgencySelect, lang.selects.urgencyDefault, lang.selects.urgency);
     updateSelectOptions(preferredLanguage, lang.selects.languageDefault, lang.selects.language);
   }
 
@@ -208,200 +339,330 @@ document.addEventListener("DOMContentLoaded", () => {
     updateDynamicTexts();
     updateHelperText();
     updateWhatsAppButton();
+    updateStripePlaceholder();
   }
 
-  function validateForm(data) {
-    const errors = [];
-    const lang = t();
+  function setupPhotoPreview() {
+    if (!photosInput) return;
 
-    if (!data.fullName.trim()) errors.push(lang.validation.fullName);
-    if (!data.phone.trim()) errors.push(lang.validation.phone);
-    if (!data.serviceType.trim()) errors.push(lang.validation.serviceType);
-    if (!data.message.trim()) errors.push(lang.validation.message);
-    if (!data.contactConsent) errors.push(lang.validation.consent);
+    let previewContainer = document.getElementById("photoPreviewContainer");
 
-    return errors;
-  }
-
-  function setFormStatus(type) {
-    if (!formStatus) return;
-
-    formStatus.textContent = t().status[type] || "";
-
-    if (type === "success") {
-      formStatus.style.color = "green";
-    } else if (type === "sending") {
-      formStatus.style.color = "#0077ff";
-    } else {
-      formStatus.style.color = "red";
-    }
-  }
-
-  let previewContainer = document.getElementById("photoPreviewContainer");
-
-  if (!previewContainer && photosInput?.parentNode) {
-    previewContainer = document.createElement("div");
-    previewContainer.id = "photoPreviewContainer";
-    previewContainer.style.marginTop = "15px";
-    photosInput.parentNode.appendChild(previewContainer);
-  }
-
-  photosInput?.addEventListener("change", () => {
-    if (!previewContainer) return;
-    previewContainer.innerHTML = "";
-
-    const files = Array.from(photosInput.files || []);
-    if (!files.length) return;
-
-    files.forEach((file) => {
-      if (!file.type.startsWith("image/")) return;
-
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        const imgWrapper = document.createElement("div");
-        imgWrapper.style.display = "inline-block";
-        imgWrapper.style.marginRight = "10px";
-        imgWrapper.style.marginBottom = "10px";
-
-        const img = document.createElement("img");
-        img.src = e.target?.result || "";
-        img.alt = file.name;
-        img.style.width = "90px";
-        img.style.height = "90px";
-        img.style.objectFit = "cover";
-        img.style.borderRadius = "8px";
-        img.style.border = "1px solid #ccc";
-
-        imgWrapper.appendChild(img);
-        previewContainer.appendChild(imgWrapper);
-      };
-
-      reader.readAsDataURL(file);
-    });
-  });
-
-  let helperText = document.getElementById("serviceHelperText");
-
-  if (!helperText && serviceType?.parentNode) {
-    helperText = document.createElement("p");
-    helperText.id = "serviceHelperText";
-    helperText.style.marginTop = "8px";
-    helperText.style.fontSize = "0.9rem";
-    helperText.style.color = "#555";
-    serviceType.parentNode.appendChild(helperText);
-  }
-
-  serviceType?.addEventListener("change", updateHelperText);
-
-  serviceForm?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(serviceForm);
-
-    const payload = {
-      fullName: String(formData.get("fullName") || "").trim(),
-      phone: String(formData.get("phone") || "").trim(),
-      email: String(formData.get("email") || "").trim(),
-      zipCode: String(formData.get("zipCode") || "").trim(),
-      serviceType: String(formData.get("serviceType") || "").trim(),
-      urgency: String(formData.get("urgency") || "").trim(),
-      preferredLanguage: String(formData.get("preferredLanguage") || "").trim(),
-      message: String(formData.get("message") || "").trim(),
-      contactConsent: formData.get("contactConsent") === "on"
-    };
-
-    const validationErrors = validateForm(payload);
-
-    if (validationErrors.length > 0) {
-      setFormStatus("validation");
-      return;
+    if (!previewContainer && photosInput.parentNode) {
+      previewContainer = document.createElement("div");
+      previewContainer.id = "photoPreviewContainer";
+      previewContainer.className = "photo-preview-container";
+      photosInput.parentNode.appendChild(previewContainer);
     }
 
-    setFormStatus("sending");
+    photosInput.addEventListener("change", () => {
+      if (!previewContainer) return;
 
-    try {
-      const response = await fetch("https://hook.us2.make.com/ucvv3upj9ym80knwea1d8z34gtyjrjlt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
+      previewContainer.innerHTML = "";
+      const files = Array.from(photosInput.files || []);
+
+      files.forEach((file) => {
+        if (!file.type.startsWith("image/")) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "photo-preview-item";
+
+          const img = document.createElement("img");
+          img.src = String(e.target?.result || "");
+          img.alt = file.name;
+
+          wrapper.appendChild(img);
+          previewContainer.appendChild(wrapper);
+        };
+
+        reader.readAsDataURL(file);
       });
+    });
+  }
 
-      if (!response.ok) {
-        throw new Error(`Failed to submit form. Status: ${response.status}`);
+  function updateHeaderOnScroll() {
+    if (!header) return;
+    header.classList.toggle("header-scrolled", window.scrollY > 30);
+  }
+
+  function updateScrollProgress() {
+    if (!progressBar) return;
+
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = `${Math.min(progress, 100)}%`;
+  }
+
+  function setupActiveNav() {
+    const sections = navLinks
+      .map((link) => {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return null;
+        const section = document.querySelector(href);
+        if (!section) return null;
+        return { link, section };
+      })
+      .filter(Boolean);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const match = sections.find((item) => item.section === entry.target);
+          if (!match) return;
+
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => link.classList.remove("is-active"));
+            match.link.classList.add("is-active");
+          }
+        });
+      },
+      {
+        threshold: 0.45
+      }
+    );
+
+    sections.forEach((item) => observer.observe(item.section));
+  }
+
+  function setupRevealAnimations() {
+    if (!revealElements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.14
+      }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+  }
+
+  function setupFaq() {
+    if (!faqItems.length) return;
+
+    faqItems.forEach((item) => {
+      const answerCandidates = Array.from(item.children).filter((child) => child.tagName === "P");
+      if (!answerCandidates.length) return;
+
+      const answer = answerCandidates[0];
+      answer.classList.add("faq-answer");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("role", "button");
+      item.setAttribute("aria-expanded", "false");
+
+      function toggleFaq() {
+        const isOpen = item.classList.toggle("is-open");
+        item.setAttribute("aria-expanded", String(isOpen));
       }
 
-      setFormStatus("success");
-      serviceForm.reset();
+      item.addEventListener("click", toggleFaq);
+      item.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleFaq();
+        }
+      });
+    });
+  }
 
-      if (previewContainer) previewContainer.innerHTML = "";
-      updateHelperText();
-      updateDynamicTexts();
-      updateWhatsAppButton();
-    } catch (error) {
-      console.error(error);
-      setFormStatus("error");
+  function updateStripePlaceholder() {
+    const stripeButton = document.querySelector("stripe-buy-button");
+    if (!stripeButton) return;
+
+    const buyButtonId = stripeButton.getAttribute("buy-button-id");
+    const publishableKey = stripeButton.getAttribute("publishable-key");
+    const isPlaceholder =
+      !buyButtonId ||
+      !publishableKey ||
+      buyButtonId.includes("TU_ID") ||
+      publishableKey.includes("TU_PUBLIC");
+
+    let wrapper = stripeButton.parentElement;
+    if (!wrapper) return;
+
+    let paymentBox = wrapper.closest(".payment-box");
+    if (!paymentBox) {
+      paymentBox = document.createElement("div");
+      paymentBox.className = "payment-box";
+      wrapper.parentNode?.insertBefore(paymentBox, wrapper);
+
+      const info = document.createElement("p");
+      info.className = "payment-note";
+      info.innerHTML = `
+        <span class="lang en" style="display:${currentLanguage === "en" ? "inline" : "none"};">You can pay securely using your card.</span>
+        <span class="lang es" style="display:${currentLanguage === "es" ? "inline" : "none"};">Puedes pagar de forma segura con tu tarjeta.</span>
+      `;
+
+      paymentBox.appendChild(info);
+      paymentBox.appendChild(wrapper);
     }
-  });
 
-  whatsappBtn?.addEventListener("click", function () {
-    const fullName = document.querySelector('[name="fullName"]')?.value?.trim() || "";
-    const phone = document.querySelector('[name="phone"]')?.value?.trim() || "";
-    const serviceValue = document.querySelector('[name="serviceType"]')?.value || "";
-    const message = document.querySelector('[name="message"]')?.value?.trim() || "";
+    let placeholder = paymentBox.querySelector(".payment-placeholder");
+
+    if (isPlaceholder) {
+      stripeButton.style.display = "none";
+
+      if (!placeholder) {
+        placeholder = document.createElement("div");
+        placeholder.className = "payment-placeholder";
+        paymentBox.appendChild(placeholder);
+      }
+
+      placeholder.textContent = t().stripePlaceholder;
+    } else {
+      stripeButton.style.display = "block";
+      if (placeholder) placeholder.remove();
+    }
+  }
+
+  function buildWhatsAppMessage() {
+    const fullName = getField("fullName")?.value?.trim() || "";
+    const phone = getField("phone")?.value?.trim() || "";
+    const serviceValue = getField("serviceType")?.value || "";
+    const message = getField("message")?.value?.trim() || "";
 
     const serviceLabel =
       t().selects.service[serviceValue] ||
       serviceValue ||
       (currentLanguage === "es" ? "servicio" : "service");
 
-    const text = t().whatsappMessage(fullName, serviceLabel, message, phone);
-    this.href = "https://wa.me/17024434470?text=" + encodeURIComponent(text);
-  });
+    return t().whatsappMessage(fullName, serviceLabel, message, phone);
+  }
+
+  function setupWhatsApp() {
+    if (!whatsappBtn) return;
+
+    whatsappBtn.addEventListener("click", function () {
+      this.href = "https://wa.me/17024434470?text=" + encodeURIComponent(buildWhatsAppMessage());
+    });
+  }
+
+  function setupFormLiveValidation() {
+    if (!serviceForm) return;
+
+    ["fullName", "phone", "email", "serviceType", "message"].forEach((id) => {
+      const field = getField(id);
+      if (!field) return;
+
+      field.addEventListener("input", () => {
+        clearFieldError(field);
+      });
+
+      field.addEventListener("change", () => {
+        clearFieldError(field);
+      });
+    });
+
+    const consent = getField("contactConsent");
+    consent?.addEventListener("change", () => clearFieldError(consent));
+  }
+
+  function setupFormSubmit() {
+    if (!serviceForm) return;
+
+    serviceForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        fullName: String(getField("fullName")?.value || "").trim(),
+        phone: String(getField("phone")?.value || "").trim(),
+        email: String(getField("email")?.value || "").trim(),
+        zipCode: String(getField("zipCode")?.value || "").trim(),
+        serviceType: String(getField("serviceType")?.value || "").trim(),
+        urgency: String(getField("urgency")?.value || "").trim(),
+        preferredLanguage: String(getField("preferredLanguage")?.value || "").trim(),
+        message: String(getField("message")?.value || "").trim(),
+        contactConsent: getField("contactConsent")?.checked === true
+      };
+
+      payload.phone = normalizePhone(payload.phone);
+
+      const errors = validateForm(payload);
+
+      if (Object.keys(errors).length > 0) {
+        showValidationErrors(errors);
+        setFormStatus("validation");
+        return;
+      }
+
+      clearAllFieldErrors();
+      setFormStatus("sending");
+
+      try {
+        const response = await fetch("https://hook.us2.make.com/ucvv3upj9ym80knwea1d8z34gtyjrjlt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to submit form. Status: ${response.status}`);
+        }
+
+        setFormStatus("success");
+        serviceForm.reset();
+
+        const previewContainer = document.getElementById("photoPreviewContainer");
+        if (previewContainer) previewContainer.innerHTML = "";
+
+        updateHelperText();
+        updateDynamicTexts();
+      } catch (error) {
+        console.error(error);
+        setFormStatus("error");
+      }
+    });
+  }
+
+  function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (!href || href === "#") return;
+
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        e.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  }
 
   btnEn?.addEventListener("click", () => setLanguage("en"));
   btnEs?.addEventListener("click", () => setLanguage("es"));
+  serviceType?.addEventListener("change", updateHelperText);
 
+  setupPhotoPreview();
+  setupWhatsApp();
+  setupFormLiveValidation();
+  setupFormSubmit();
+  setupSmoothScroll();
+  setupRevealAnimations();
+  setupActiveNav();
+  setupFaq();
   setLanguage(currentLanguage);
-
-  function updateHeaderOnScroll() {
-    if (!header) return;
-    if (window.scrollY > 30) {
-      header.classList.add("header-scrolled");
-    } else {
-      header.classList.remove("header-scrolled");
-    }
-  }
-
   updateHeaderOnScroll();
-  window.addEventListener("scroll", updateHeaderOnScroll);
+  updateScrollProgress();
 
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-      if (!href || href === "#") return;
-
-      const target = document.querySelector(href);
-      if (!target) return;
-
-      e.preventDefault();
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
+  window.addEventListener("scroll", () => {
+    updateHeaderOnScroll();
+    updateScrollProgress();
   });
-});
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-});
-
-document.querySelectorAll(".reveal").forEach(el => {
-  observer.observe(el);
 });
