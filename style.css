@@ -1090,3 +1090,64 @@ body::before {
     border-radius: 18px;
   }
 }
+/* =========================
+   ENHANCEMENTS SAFE
+========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header-scrolled {
+  background: rgba(17, 17, 17, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.service-card,
+.why-card,
+.before-after-card,
+.hero-card,
+.faq-item,
+.gallery-grid img {
+  transition: transform 0.28s ease, box-shadow 0.28s ease, opacity 0.7s ease;
+}
+
+.service-card:hover,
+.why-card:hover,
+.before-after-card:hover,
+.hero-card:hover,
+.faq-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+}
+
+#whatsappBtn.floating-ready {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+#whatsappBtn {
+  opacity: 1;
+}
+
+.hero-overlay {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+}
