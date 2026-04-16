@@ -1150,13 +1150,6 @@ html {
 .hero-overlay {
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
 }
-/* FIX TEMPORAL PARA QUE TODO VUELVA A VERSE */
-.reveal,
-.hidden {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
 
 .hero,
 .section,
