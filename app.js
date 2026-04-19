@@ -174,13 +174,13 @@ return cleaned.length >= 10;
 
 function isValidEmail(value) {
 if (!value.trim()) return true;
-return /^[^\s@]+@[^\s@]+.[^\s@]+$/.test(value.trim());
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
 function updateSelectOptions(selectElement, defaultText, valuesMap) {
 if (!selectElement) return;
 
-```
+
 const currentValue = selectElement.value;
 const options = Array.from(selectElement.options);
 
@@ -195,7 +195,7 @@ options.forEach((option, index) => {
 if (Array.from(selectElement.options).some((opt) => opt.value === currentValue)) {
   selectElement.value = currentValue;
 }
-```
+
 
 }
 
@@ -203,12 +203,12 @@ function clearFieldError(field) {
 if (!field) return;
 field.classList.remove("input-error");
 
-```
+
 const existing = field.parentElement?.querySelector(".field-error");
 if (existing) {
   existing.remove();
 }
-```
+
 
 }
 
@@ -217,12 +217,12 @@ if (!field) return;
 clearFieldError(field);
 field.classList.add("input-error");
 
-```
+
 const error = document.createElement("p");
 error.className = "field-error";
 error.textContent = message;
 field.parentElement?.appendChild(error);
-```
+
 
 }
 
@@ -235,7 +235,7 @@ function validateForm(data) {
 const errors = {};
 const lang = t();
 
-```
+
 if (!data.fullName.trim()) {
   errors.fullName = lang.validation.fullName;
 }
@@ -263,21 +263,21 @@ if (!data.contactConsent) {
 }
 
 return errors;
-```
+
 
 }
 
 function showValidationErrors(errors) {
 clearAllFieldErrors();
 
-```
+
 if (errors.fullName) setFieldError(getField("fullName"), errors.fullName);
 if (errors.phone) setFieldError(getField("phone"), errors.phone);
 if (errors.email) setFieldError(getField("email"), errors.email);
 if (errors.serviceType) setFieldError(getField("serviceType"), errors.serviceType);
 if (errors.message) setFieldError(getField("message"), errors.message);
 if (errors.contactConsent) setFieldError(getField("contactConsent"), errors.contactConsent);
-```
+
 
 }
 
@@ -285,7 +285,7 @@ function setFormStatus(type) {
 if (!formStatus) return;
 formStatus.textContent = t().status[type] || "";
 
-```
+
 if (type === "success") {
   formStatus.style.color = "#15803d";
 } else if (type === "sending") {
@@ -293,7 +293,7 @@ if (type === "success") {
 } else {
   formStatus.style.color = "#dc2626";
 }
-```
+
 
 }
 
@@ -305,7 +305,7 @@ whatsappBtn.textContent = t().buttons.whatsapp;
 function updateHelperText() {
 if (!serviceType) return;
 
-```
+
 let helperText = document.getElementById("serviceHelperText");
 
 if (!helperText && serviceType.parentNode) {
@@ -318,14 +318,14 @@ if (!helperText && serviceType.parentNode) {
 if (helperText) {
   helperText.textContent = t().helper[serviceType.value] || "";
 }
-```
+
 
 }
 
 function updateDynamicTexts() {
 const lang = t();
 
-```
+
 const fullName = getField("fullName");
 const phone = getField("phone");
 const email = getField("email");
@@ -342,7 +342,7 @@ if (submitBtn) submitBtn.textContent = lang.buttons.submit;
 updateSelectOptions(serviceType, lang.selects.serviceDefault, lang.selects.service);
 updateSelectOptions(urgencySelect, lang.selects.urgencyDefault, lang.selects.urgency);
 updateSelectOptions(preferredLanguage, lang.selects.languageDefault, lang.selects.language);
-```
+
 
 }
 
@@ -350,7 +350,7 @@ function setLanguage(language) {
 currentLanguage = language === "es" ? "es" : "en";
 localStorage.setItem("siteLanguage", currentLanguage);
 
-```
+
 document.querySelectorAll(".lang.en").forEach((el) => {
   el.style.display = currentLanguage === "en" ? "inline" : "none";
 });
@@ -367,14 +367,14 @@ updateHelperText();
 updateWhatsAppButton();
 updateStripePlaceholder();
 updateFaqAccessibilityText();
-```
+
 
 }
 
 function setupPhotoPreview() {
 if (!photosInput) return;
 
-```
+
 let previewContainer = document.getElementById("photoPreviewContainer");
 
 if (!previewContainer && photosInput.parentNode) {
@@ -409,7 +409,7 @@ photosInput.addEventListener("change", () => {
     reader.readAsDataURL(file);
   });
 });
-```
+
 
 }
 
@@ -421,12 +421,12 @@ header.classList.toggle("header-scrolled", window.scrollY > 20);
 function updateScrollProgress() {
 if (!progressBar) return;
 
-```
+
 const scrollTop = window.scrollY;
 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 progressBar.style.width = `${Math.min(progress, 100)}%`;
-```
+
 
 }
 
@@ -441,7 +441,7 @@ return { link, section };
 })
 .filter(Boolean);
 
-```
+
 if (!sections.length) return;
 
 const observer = new IntersectionObserver(
@@ -462,14 +462,14 @@ const observer = new IntersectionObserver(
 );
 
 sections.forEach((item) => observer.observe(item.section));
-```
+
 
 }
 
 function setupRevealAnimations() {
 if (!revealElements.length) return;
 
-```
+
 const observer = new IntersectionObserver(
   (entries, obs) => {
     entries.forEach((entry) => {
@@ -485,14 +485,14 @@ const observer = new IntersectionObserver(
 );
 
 revealElements.forEach((el) => observer.observe(el));
-```
+
 
 }
 
 function setupFaq() {
 if (!faqItems.length) return;
 
-```
+
 faqItems.forEach((item, index) => {
   const answerCandidates = Array.from(item.children).filter((child) => child.tagName === "P");
   if (!answerCandidates.length) return;
@@ -524,7 +524,7 @@ faqItems.forEach((item, index) => {
 });
 
 updateFaqAccessibilityText();
-```
+
 
 }
 
@@ -539,7 +539,7 @@ function updateStripePlaceholder() {
 const stripeButton = document.querySelector("stripe-buy-button");
 if (!stripeButton) return;
 
-```
+
 const buyButtonId = stripeButton.getAttribute("buy-button-id");
 const publishableKey = stripeButton.getAttribute("publishable-key");
 const isPlaceholder =
@@ -567,7 +567,7 @@ if (isPlaceholder) {
   stripeButton.style.display = "block";
   if (placeholder) placeholder.remove();
 }
-```
+
 
 }
 
@@ -577,7 +577,7 @@ const phone = getField("phone")?.value?.trim() || "";
 const serviceValue = getField("serviceType")?.value || "";
 const message = getField("message")?.value?.trim() || "";
 
-```
+
 const serviceLabel =
   t().selects.service[serviceValue] ||
   serviceValue ||
@@ -589,25 +589,25 @@ return t().whatsappMessage(
   message || (currentLanguage === "es" ? "Necesito información" : "I need information"),
   phone || ""
 );
-```
+
 
 }
 
 function setupWhatsApp() {
 if (!whatsappBtn) return;
 
-```
+
 whatsappBtn.addEventListener("click", function () {
   this.href = "https://wa.me/17024434470?text=" + encodeURIComponent(buildWhatsAppMessage());
 });
-```
+
 
 }
 
 function setupFormLiveValidation() {
 if (!serviceForm) return;
 
-```
+
 ["fullName", "phone", "email", "serviceType", "message"].forEach((id) => {
   const field = getField(id);
   if (!field) return;
@@ -623,14 +623,14 @@ if (!serviceForm) return;
 
 const consent = getField("contactConsent");
 consent?.addEventListener("change", () => clearFieldError(consent));
-```
+
 
 }
 
 function setupFormSubmit() {
 if (!serviceForm) return;
 
-```
+
 serviceForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -685,7 +685,7 @@ serviceForm.addEventListener("submit", async (event) => {
     setFormStatus("error");
   }
 });
-```
+
 
 }
 
@@ -695,7 +695,7 @@ anchor.addEventListener("click", function (e) {
 const href = this.getAttribute("href");
 if (!href || href === "#") return;
 
-```
+
     const target = document.querySelector(href);
     if (!target) return;
 
@@ -706,14 +706,14 @@ if (!href || href === "#") return;
     });
   });
 });
-```
+
 
 }
 
 function setupGalleryTilt() {
 if (!galleryCards.length || window.matchMedia("(pointer: coarse)").matches) return;
 
-```
+
 galleryCards.forEach((card) => {
   card.addEventListener("mousemove", (e) => {
     const rect = card.getBoundingClientRect();
@@ -730,7 +730,7 @@ galleryCards.forEach((card) => {
     card.style.transform = "";
   });
 });
-```
+
 
 }
 
