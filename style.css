@@ -1171,3 +1171,80 @@ width: 100%;
 text-align: center;
 }
 }
+
+/* =========================
+SERVICE AREAS
+========================= */
+.service-areas {
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(238,244,251,0.86));
+}
+
+.whatsapp-float {
+  text-decoration: none;
+}
+
+/* Better mobile nav/card behavior */
+@media (max-width: 980px) {
+  .header-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .main-nav ul {
+    flex-wrap: wrap;
+    gap: 14px 16px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-overlay {
+    padding: 28px 20px;
+  }
+
+  .hero-stats,
+  .trust-strip-grid,
+  .footer-container,
+  .contact-wrapper,
+  .before-after-images {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .gallery-cards,
+  .services-grid,
+  .why-us-grid,
+  .before-after-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card img,
+  .gallery-card img,
+  .ba-image img {
+    height: auto;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .language-switcher {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .hero-buttons,
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
