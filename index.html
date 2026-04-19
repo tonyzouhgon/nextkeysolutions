@@ -455,20 +455,24 @@
 
         <button type="submit" class="btn btn-primary" id="submitBtn">Submit Request</button>
 
-        <div class="payment-box">
-          <h3><span class="lang en">Secure Payment</span><span class="lang es">Pago seguro</span></h3>
-          <p class="payment-note">
-            <span class="lang en">You can pay securely with your card through Stripe.</span>
-            <span class="lang es">Puedes pagar de forma segura con tu tarjeta a través de Stripe.</span>
-          </p>
-          <div class="stripe-button-wrap">
-           <stripe-buy-button
-             buy-button-id="buy_btn_1TLvv6GhkplMn8ZgFd7yNHuz"
-             publishable-key="pk_live_...">
-           </stripe-buy-button>
-          </div>
-        </div>
+       <div class="payment-box">
+  <h3>
+    <span class="lang en">Secure Payment</span>
+    <span class="lang es">Pago seguro</span>
+  </h3>
 
+  <p class="payment-note">
+    <span class="lang en">You can pay securely with your card through Stripe.</span>
+    <span class="lang es">Puedes pagar de forma segura con tu tarjeta a través de Stripe.</span>
+  </p>
+
+  <div class="stripe-button-wrap">
+    <stripe-buy-button
+      buy-button-id="buy_btn_1TLvv6GhkplMn8ZgFd7yNHuz"
+      publishable-key="pk_live_51TLv9VGhkplMn8ZgV9SjSBo2tKnrvHTEfSUdnL8NBRYTIVrHnEXJKC2BQouucn1IEdc1WnVYfai1nKCl0wstpR00GZuMHREp">
+    </stripe-buy-button>
+  </div>
+</div>
         <p id="formStatus" class="form-status" aria-live="polite"></p>
       </form>
     </div>
