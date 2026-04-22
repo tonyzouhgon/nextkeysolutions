@@ -68,8 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         fullName: "Full name is required.",
         phone: "Phone number is required.",
         phoneFormat: "Please enter a valid phone number.",
+        email: "Email address is required.",
         emailFormat: "Please enter a valid email address.",
+        zipCode: "ZIP code is required.",
         serviceType: "Please select a service type.",
+        urgency: "Please select the urgency.",
+        preferredLanguage: "Please select the preferred language.",
         message: "Please describe the problem.",
         consent: "You must agree to be contacted regarding your service request."
       },
@@ -138,8 +142,12 @@ document.addEventListener("DOMContentLoaded", () => {
         fullName: "El nombre completo es obligatorio.",
         phone: "El número de teléfono es obligatorio.",
         phoneFormat: "Por favor ingresa un número de teléfono válido.",
+        email: "El correo electrónico es obligatorio.",
         emailFormat: "Por favor ingresa un correo electrónico válido.",
+        zipCode: "El código postal es obligatorio.",
         serviceType: "Por favor selecciona un tipo de servicio.",
+        urgency: "Por favor selecciona la urgencia.",
+        preferredLanguage: "Por favor selecciona el idioma preferido.",
         message: "Por favor describe el problema.",
         consent: "Debes aceptar ser contactado con respecto a tu solicitud de servicio."
       },
@@ -246,12 +254,26 @@ document.addEventListener("DOMContentLoaded", () => {
       errors.phone = lang.validation.phoneFormat;
     }
 
-    if (data.email.trim() && !isValidEmail(data.email)) {
+    if (!data.email.trim()) {
+      errors.email = lang.validation.email;
+    } else if (!isValidEmail(data.email)) {
       errors.email = lang.validation.emailFormat;
+    }
+
+    if (!data.zipCode.trim()) {
+      errors.zipCode = lang.validation.zipCode;
     }
 
     if (!data.serviceType.trim()) {
       errors.serviceType = lang.validation.serviceType;
+    }
+
+    if (!data.urgency.trim()) {
+      errors.urgency = lang.validation.urgency;
+    }
+
+    if (!data.preferredLanguage.trim()) {
+      errors.preferredLanguage = lang.validation.preferredLanguage;
     }
 
     if (!data.message.trim()) {
@@ -271,7 +293,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (errors.fullName) setFieldError(getField("fullName"), errors.fullName);
     if (errors.phone) setFieldError(getField("phone"), errors.phone);
     if (errors.email) setFieldError(getField("email"), errors.email);
+    if (errors.zipCode) setFieldError(getField("zipCode"), errors.zipCode);
     if (errors.serviceType) setFieldError(getField("serviceType"), errors.serviceType);
+    if (errors.urgency) setFieldError(getField("urgency"), errors.urgency);
+    if (errors.preferredLanguage) setFieldError(getField("preferredLanguage"), errors.preferredLanguage);
     if (errors.message) setFieldError(getField("message"), errors.message);
     if (errors.contactConsent) setFieldError(getField("contactConsent"), errors.contactConsent);
   }
@@ -566,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setupFormLiveValidation() {
     if (!serviceForm) return;
 
-    ["fullName", "phone", "email", "serviceType", "message"].forEach((id) => {
+    ["fullName", "phone", "email", "zipCode", "serviceType", "urgency", "preferredLanguage", "message"].forEach((id) => {
       const field = getField(id);
       if (!field) return;
 
@@ -602,6 +627,17 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       payload.phone = normalizePhone(payload.phone);
+
+      payload.submittedAt = new Date().toISOString();
+      payload.source = "website_form";
+      payload.businessName = "NextKeySolutions LLC";
+      payload.businessPhone = "702-443-4470";
+      payload.serviceLabel =
+        t().selects.service[payload.serviceType] || payload.serviceType || "";
+      payload.urgencyLabel =
+        t().selects.urgency[payload.urgency] || payload.urgency || "";
+      payload.preferredLanguageLabel =
+        t().selects.language[payload.preferredLanguage] || payload.preferredLanguage || "";
 
       const errors = validateForm(payload);
 
