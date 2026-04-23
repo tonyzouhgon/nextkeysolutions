@@ -562,31 +562,69 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function buildWhatsAppMessage() {
-    const fullName = getField("fullName")?.value?.trim() || "";
-    const phone = getField("phone")?.value?.trim() || "";
-    const serviceValue = getField("serviceType")?.value || "";
-    const message = getField("message")?.value?.trim() || "";
+  const fullName = getField("fullName")?.value?.trim() || "";
+  const phone = getField("phone")?.value?.trim() || "";
+  const email = getField("email")?.value?.trim() || "";
+  const zipCode = getField("zipCode")?.value?.trim() || "";
+  const serviceValue = getField("serviceType")?.value || "";
+  const urgencyValue = getField("urgency")?.value || "";
+  const preferredLanguageValue = getField("preferredLanguage")?.value || "";
+  const message = getField("message")?.value?.trim() || "";
 
-    const serviceLabel =
-      t().selects.service[serviceValue] ||
-      serviceValue ||
-      (currentLanguage === "es" ? "servicio" : "service");
+  const langToUse =
+    preferredLanguageValue === "spanish"
+      ? "es"
+      : preferredLanguageValue === "english"
+      ? "en"
+      : currentLanguage;
 
-    return t().whatsappMessage(
-      fullName || (currentLanguage === "es" ? "cliente" : "client"),
-      serviceLabel,
-      message || (currentLanguage === "es" ? "Necesito información" : "I need information"),
-      phone || ""
-    );
+  const serviceLabel =
+    translations[langToUse]?.selects?.service?.[serviceValue] ||
+    serviceValue ||
+    (langToUse === "es" ? "servicio no especificado" : "service not specified");
+
+  const urgencyLabel =
+    translations[langToUse]?.selects?.urgency?.[urgencyValue] ||
+    urgencyValue ||
+    (langToUse === "es" ? "no especificada" : "not specified");
+
+  if (langToUse === "es") {
+    return [
+      `Hola, mi nombre es ${fullName || "N/A"}.`,
+      `Necesito ayuda con ${serviceLabel}.`,
+      ``,
+      `Teléfono: ${phone || "N/A"}`,
+      `Correo: ${email || "N/A"}`,
+      `Código postal: ${zipCode || "N/A"}`,
+      `Urgencia: ${urgencyLabel}`,
+      ``,
+      `Descripción del problema:`,
+      `${message || "Sin descripción."}`
+    ].join("\n");
   }
+
+  return [
+    `Hello, my name is ${fullName || "N/A"}.`,
+    `I need help with ${serviceLabel}.`,
+    ``,
+    `Phone: ${phone || "N/A"}`,
+    `Email: ${email || "N/A"}`,
+    `ZIP Code: ${zipCode || "N/A"}`,
+    `Urgency: ${urgencyLabel}`,
+    ``,
+    `Problem description:`,
+    `${message || "No description provided."}`
+  ].join("\n");
+}
 
   function setupWhatsApp() {
-    if (!whatsappBtn) return;
+  if (!whatsappBtn) return;
 
-    whatsappBtn.addEventListener("click", function () {
-      this.href = "https://wa.me/17024434470?text=" + encodeURIComponent(buildWhatsAppMessage());
-    });
-  }
+  whatsappBtn.addEventListener("click", function () {
+    const message = buildWhatsAppMessage();
+    this.href = "https://wa.me/17024434470?text=" + encodeURIComponent(message);
+  });
+}
 
   function setupFormLiveValidation() {
     if (!serviceForm) return;
