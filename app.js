@@ -580,40 +580,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const serviceLabel =
     translations[langToUse]?.selects?.service?.[serviceValue] ||
-    serviceValue ||
-    (langToUse === "es" ? "servicio no especificado" : "service not specified");
+    "";
 
   const urgencyLabel =
     translations[langToUse]?.selects?.urgency?.[urgencyValue] ||
-    urgencyValue ||
-    (langToUse === "es" ? "no especificada" : "not specified");
+    "";
+
+  const hasDetailedInfo =
+    fullName && phone && serviceValue && message;
+
+  if (!hasDetailedInfo) {
+    return langToUse === "es"
+      ? "Hola, me gustaría recibir información sobre sus servicios."
+      : "Hello, I would like more information about your services.";
+  }
 
   if (langToUse === "es") {
     return [
-      `Hola, mi nombre es ${fullName || "N/A"}.`,
+      `Hola, mi nombre es ${fullName}.`,
       `Necesito ayuda con ${serviceLabel}.`,
       ``,
-      `Teléfono: ${phone || "N/A"}`,
-      `Correo: ${email || "N/A"}`,
-      `Código postal: ${zipCode || "N/A"}`,
-      `Urgencia: ${urgencyLabel}`,
+      `Teléfono: ${phone}`,
+      `Correo: ${email || "No proporcionado"}`,
+      `Código postal: ${zipCode || "No proporcionado"}`,
+      `Urgencia: ${urgencyLabel || "No especificada"}`,
       ``,
       `Descripción del problema:`,
-      `${message || "Sin descripción."}`
+      `${message}`
     ].join("\n");
   }
 
   return [
-    `Hello, my name is ${fullName || "N/A"}.`,
+    `Hello, my name is ${fullName}.`,
     `I need help with ${serviceLabel}.`,
     ``,
-    `Phone: ${phone || "N/A"}`,
-    `Email: ${email || "N/A"}`,
-    `ZIP Code: ${zipCode || "N/A"}`,
-    `Urgency: ${urgencyLabel}`,
+    `Phone: ${phone}`,
+    `Email: ${email || "Not provided"}`,
+    `ZIP Code: ${zipCode || "Not provided"}`,
+    `Urgency: ${urgencyLabel || "Not specified"}`,
     ``,
     `Problem description:`,
-    `${message || "No description provided."}`
+    `${message}`
   ].join("\n");
 }
 
