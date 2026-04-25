@@ -696,12 +696,22 @@ document.addEventListener("DOMContentLoaded", () => {
       setFormStatus("sending");
 
       try {
+        const formData = new FormData();
+
+        Object.entries(payload).forEach(([key, value]) => {
+          formData.append(key, String(value ?? ""));
+        });
+
+        const files = Array.from(photosInput?.files || []);
+        files.forEach((file, index) => {
+          formData.append(`photo_${index + 1}`, file, file.name);
+        });
+
+        formData.append("photoCount", String(files.length));
+
         const response = await fetch("https://hook.us2.make.com/ucvv3upj9ym80knwea1d8z34gtyjrjlt", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
+          body: formData
         });
 
         if (!response.ok) {
