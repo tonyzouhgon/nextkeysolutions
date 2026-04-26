@@ -1,708 +1,471 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
   <title>NextKeySolutions LLC</title>
   <meta
     name="description"
-    content="Professional HVAC, plumbing, electrical, and handyman services in Las Vegas, Henderson, and surrounding areas. Fast, reliable, and bilingual service for residential and property management needs."
+    content="Professional HVAC, maintenance, plumbing, electrical, and handyman services in Las Vegas and surrounding areas. Bilingual service, fast communication, and reliable results for homes and properties."
   />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- LANGUAGE SWITCHER -->
-  <div class="language-switcher">
-    <button id="lang-en" class="lang-btn active" type="button">EN</button>
-    <button id="lang-es" class="lang-btn" type="button">ES</button>
+  <div class="scroll-progress" aria-hidden="true">
+    <span id="scrollProgressBar"></span>
   </div>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="container header-container">
-      <div class="logo-area">
-        <a href="#home" class="logo-text">NextKeySolutions LLC</a>
-      </div>
+      <a href="#home" class="logo-text">NextKeySolutions LLC</a>
 
-      <nav class="main-nav">
-        <ul>
-          <li>
-            <a href="#home">
-              <span class="lang en">Home</span>
-              <span class="lang es">Inicio</span>
-            </a>
-          </li>
-          <li>
-            <a href="#services">
-              <span class="lang en">Services</span>
-              <span class="lang es">Servicios</span>
-            </a>
-          </li>
-          <li>
-            <a href="#why-us">
-              <span class="lang en">Why Us</span>
-              <span class="lang es">Por Qué Nosotros</span>
-            </a>
-          </li>
-          <li>
-            <a href="#before-after">
-              <span class="lang en">Before / After</span>
-              <span class="lang es">Antes / Después</span>
-            </a>
-          </li>
-          <li>
-            <a href="#reviews">
-              <span class="lang en">Reviews</span>
-              <span class="lang es">Reseñas</span>
-            </a>
-          </li>
-          <li>
-            <a href="#faq">
-              <span class="lang en">FAQ</span>
-              <span class="lang es">Preguntas</span>
-            </a>
-          </li>
-          <li>
-            <a href="#contact">
-              <span class="lang en">Contact</span>
-              <span class="lang es">Contacto</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
 
-      <div class="header-actions">
-        <a href="tel:7024434470" class="btn btn-call">
-          <span class="lang en">Call Now</span>
-          <span class="lang es">Llama Ahora</span>
-        </a>
-        <a href="https://wa.me/17024434470" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
-          WhatsApp
-        </a>
-      </div>
-    </div>
+  <nav class="main-nav" aria-label="Main navigation">
+    <ul>
+      <li><a href="#home"><span class="lang en">Home</span><span class="lang es">Inicio</span></a></li>
+      <li><a href="#services"><span class="lang en">Services</span><span class="lang es">Servicios</span></a></li>
+      <li><a href="#why-us"><span class="lang en">Why Us</span><span class="lang es">Por Qué Nosotros</span></a></li>
+      <li><a href="gallery.html"><span class="lang en">Gallery</span><span class="lang es">Galería</span></a></li>
+      <li><a href="before-after.html"><span class="lang en">Before / After</span><span class="lang es">Antes / Después</span></a></li>
+      <li><a href="#reviews"><span class="lang en">Reviews</span><span class="lang es">Reseñas</span></a></li>
+      <li><a href="#faq"><span class="lang en">FAQ</span><span class="lang es">Preguntas</span></a></li>
+      <li><a href="#contact"><span class="lang en">Contact</span><span class="lang es">Contacto</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="header-actions">
+    <a href="tel:7024434470" class="btn btn-call">
+      <span class="lang en">Call Now</span>
+      <span class="lang es">Llama Ahora</span>
+    </a>
+
+    <a
+      href="https://wa.me/17024434470"
+      class="btn btn-whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="lang en">WhatsApp</span>
+      <span class="lang es">WhatsApp</span>
+    </a>
+  </div>
+
+  <div class="language-switcher">
+    <button id="lang-en" class="lang-btn active" type="button" aria-label="Switch language to English">EN</button>
+    <button id="lang-es" class="lang-btn" type="button" aria-label="Cambiar idioma a español">ES</button>
+  </div>
+</div>
+
+
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-overlay">
-      <p class="hero-tag">
-        <span class="lang en">Reliable Service • Bilingual Support • Las Vegas</span>
-        <span class="lang es">Servicio Confiable • Atención Bilingüe • Las Vegas</span>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+      <div class="hero-overlay reveal reveal-zoom">
+        <p class="hero-tag">
+          <span class="lang en">HVAC • Repairs • Maintenance • Las Vegas</span>
+          <span class="lang es">HVAC • Reparaciones • Mantenimiento • Las Vegas</span>
+        </p>
+
+
+    <h1>
+      <span class="lang en">Clear communication, clean work, and dependable service for homes, rentals, and properties.</span>
+      <span class="lang es">Comunicación clara, trabajo limpio y un servicio confiable para casas, rentas y propiedades.</span>
+    </h1>
+
+    <p class="hero-description">
+      <span class="lang en">
+        We help homeowners, rentals, and property managers with HVAC, repairs, plumbing, electrical work, and general maintenance handled with clear communication, solid follow-through, and attention to detail.
+      </span>
+      <span class="lang es">
+        Ayudamos a propietarios, rentas y administradores con trabajos de HVAC, reparaciones, plomería, electricidad y mantenimiento general, siempre con comunicación clara, buen seguimiento y atención al detalle.
+      </span>
+    </p>
+
+    <div class="hero-buttons">
+      <a href="tel:7024434470" class="btn btn-secondary hero-quick-call">
+        <span class="lang en">Call 702-443-4470</span>
+        <span class="lang es">Llama al 702-443-4470</span>
+      </a>
+      <a href="#contact" class="btn btn-primary">
+        <span class="lang en">Request Service</span>
+        <span class="lang es">Solicitar servicio</span>
+      </a>
+
+      <a href="gallery.html" class="btn btn-secondary">
+        <span class="lang en">See Our Work</span>
+        <span class="lang es">Ver trabajos</span>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong><span class="lang en">Bilingual</span><span class="lang es">Bilingüe</span></strong>
+        <span><span class="lang en">English & Spanish support</span><span class="lang es">Atención en inglés y español</span></span>
+      </div>
+
+      <div class="hero-stat">
+        <strong><span class="lang en">Fast response</span><span class="lang es">Respuesta rápida</span></strong>
+        <span><span class="lang en">Quick follow-up on service requests</span><span class="lang es">Seguimiento rápido a solicitudes</span></span>
+      </div>
+
+      <div class="hero-stat">
+        <strong><span class="lang en">Local service</span><span class="lang es">Servicio local</span></strong>
+        <span><span class="lang en">Las Vegas and nearby areas</span><span class="lang es">Las Vegas y áreas cercanas</span></span>
+      </div>
+    </div>
+
+    <div class="hero-badges reveal">
+      <span class="hero-badge"><span class="lang en">Fast communication</span><span class="lang es">Comunicación rápida</span></span>
+      <span class="hero-badge"><span class="lang en">Bilingual service</span><span class="lang es">Servicio bilingüe</span></span>
+      <span class="hero-badge"><span class="lang en">Residential & property support</span><span class="lang es">Soporte residencial y de propiedades</span></span>
+    </div>
+  </div>
+</section>
+
+
+<section class="section trust-strip">
+  <div class="container trust-strip-grid reveal">
+    <div class="trust-item">
+      <h3><span class="lang en">Clear communication</span><span class="lang es">Comunicación clara</span></h3>
+      <p><span class="lang en">We keep communication direct, respectful, and easy to follow from the first call to the final walkthrough.</span><span class="lang es">Manejamos la comunicación de forma directa, respetuosa y fácil de seguir desde la primera llamada hasta la entrega final.</span></p>
+    </div>
+
+    <div class="trust-item">
+      <h3><span class="lang en">Project photos</span><span class="lang es">Fotos reales</span></h3>
+      <p><span class="lang en">We use photos so clients can get a clear sense of the kind of work we do and the standard we hold ourselves to.</span><span class="lang es">Usamos fotos reales para que la gente pueda ver el tipo de trabajo que realmente hacemos.</span></p>
+    </div>
+
+    <div class="trust-item">
+      <h3><span class="lang en">Residential & property support</span><span class="lang es">Soporte residencial y de propiedades</span></h3>
+      <p><span class="lang en">We work with homes, apartments, rentals, and day-to-day maintenance needs that need to be handled clearly and professionally.</span><span class="lang es">Trabajamos con casas, apartamentos, rentas y necesidades de mantenimiento que deben atenderse de forma clara y profesional.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="services section" id="services">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-tag">
+        <span class="lang en">Our Services</span>
+        <span class="lang es">Nuestros servicios</span>
       </p>
-
-      <h1>
-        <span class="lang en">Professional Repair & Maintenance Solutions You Can Count On</span>
-        <span class="lang es">Soluciones Profesionales de Reparación y Mantenimiento en las que Puedes Confiar</span>
-      </h1>
-
-      <p class="hero-description">
-        <span class="lang en">
-          NextKeySolutions provides dependable HVAC, plumbing, electrical, and handyman services
-          for Las Vegas, Henderson, and surrounding areas with professional communication, fast follow-up,
-          and practical solutions for homes and properties.
-        </span>
-        <span class="lang es">
-          NextKeySolutions ofrece servicios confiables de HVAC, plomería, electricidad y handyman
-          para Las Vegas, Henderson y áreas cercanas, con comunicación profesional, respuesta rápida
-          y soluciones prácticas para hogares y propiedades.
-        </span>
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">
-          <span class="lang en">Request Service</span>
-          <span class="lang es">Solicitar Servicio</span>
-        </a>
-
-        <a href="#services" class="btn btn-secondary">
-          <span class="lang en">View Services</span>
-          <span class="lang es">Ver Servicios</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- HIGHLIGHTS -->
-  <section class="section">
-    <div class="container">
-      <div class="hero-image-box">
-        <div class="hero-card">
-          <h3>
-            <span class="lang en">Fast Response</span>
-            <span class="lang es">Respuesta Rápida</span>
-          </h3>
-          <p>
-            <span class="lang en">Quick communication and organized service requests.</span>
-            <span class="lang es">Comunicación rápida y solicitudes de servicio organizadas.</span>
-          </p>
-        </div>
-
-        <div class="hero-card">
-          <h3>
-            <span class="lang en">Bilingual Support</span>
-            <span class="lang es">Atención Bilingüe</span>
-          </h3>
-          <p>
-            <span class="lang en">English and Spanish assistance for better communication.</span>
-            <span class="lang es">Atención en inglés y español para una mejor comunicación.</span>
-          </p>
-        </div>
-
-        <div class="hero-card">
-          <h3>
-            <span class="lang en">Residential & Property Services</span>
-            <span class="lang es">Servicios Residenciales y para Propiedades</span>
-          </h3>
-          <p>
-            <span class="lang en">Solutions for homes, apartments, rentals, and property management needs.</span>
-            <span class="lang es">Soluciones para casas, apartamentos, rentas y necesidades de administración de propiedades.</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services section" id="services">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-tag">
-          <span class="lang en">Our Services</span>
-          <span class="lang es">Nuestros Servicios</span>
-        </p>
-        <h2>
-          <span class="lang en">What We Help With</span>
-          <span class="lang es">En Qué Podemos Ayudarte</span>
-        </h2>
-        <p>
-          <span class="lang en">Practical, dependable services designed to solve common residential and property maintenance issues.</span>
-          <span class="lang es">Servicios prácticos y confiables diseñados para resolver problemas comunes de mantenimiento residencial y de propiedades.</span>
-        </p>
-      </div>
-
-      <div class="services-grid">
-        <article class="service-card">
-          <img src="assets/images/service/imagen15.jpg" alt="HVAC service" loading="lazy" />
-          <h3>
-            <span class="lang en">HVAC Services</span>
-            <span class="lang es">Servicios de HVAC</span>
-          </h3>
-          <p>
-            <span class="lang en">Air conditioning troubleshooting, maintenance support, airflow concerns, cooling issues, and general system service.</span>
-            <span class="lang es">Diagnóstico de aire acondicionado, mantenimiento, problemas de flujo de aire, fallas de enfriamiento y servicio general del sistema.</span>
-          </p>
-        </article>
-
-        <article class="service-card">
-          <img src="assets/images/service/imagen3.jpg" alt="Electrical service" loading="lazy" />
-          <h3>
-            <span class="lang en">Electrical Support</span>
-            <span class="lang es">Soporte Eléctrico</span>
-          </h3>
-          <p>
-            <span class="lang en">Basic electrical troubleshooting, outlet and fixture issues, breaker-related concerns, and general electrical help.</span>
-            <span class="lang es">Diagnóstico eléctrico básico, problemas con contactos y lámparas, fallas relacionadas con breakers y ayuda eléctrica general.</span>
-          </p>
-        </article>
-
-        <article class="service-card">
-          <img src="assets/images/service/imagen21.jpg" alt="General maintenance service" loading="lazy" />
-          <h3>
-            <span class="lang en">General Maintenance</span>
-            <span class="lang es">Mantenimiento General</span>
-          </h3>
-          <p>
-            <span class="lang en">Professional repair support for maintenance, troubleshooting, installations, and property service work.</span>
-            <span class="lang es">Apoyo profesional en reparaciones, mantenimiento, diagnósticos, instalaciones y trabajos de servicio para propiedades.</span>
-          </p>
-        </article>
-
-        <article class="service-card">
-          <h3>
-            <span class="lang en">Plumbing Repairs</span>
-            <span class="lang es">Reparaciones de Plomería</span>
-          </h3>
-          <p>
-            <span class="lang en">Water leaks, drain concerns, fixture issues, toilet problems, and common plumbing-related service needs.</span>
-            <span class="lang es">Fugas de agua, problemas de drenaje, fallas en accesorios, problemas con sanitarios y otras necesidades comunes de plomería.</span>
-          </p>
-        </article>
-
-        <article class="service-card">
-          <h3>
-            <span class="lang en">Handyman Work</span>
-            <span class="lang es">Trabajos de Handyman</span>
-          </h3>
-          <p>
-            <span class="lang en">General repair work, installation support, touch-ups, adjustments, and property maintenance tasks.</span>
-            <span class="lang es">Reparaciones generales, apoyo en instalaciones, retoques, ajustes y tareas de mantenimiento de propiedades.</span>
-          </p>
-        </article>
-
-        <article class="service-card">
-          <h3>
-            <span class="lang en">Property Maintenance</span>
-            <span class="lang es">Mantenimiento de Propiedades</span>
-          </h3>
-          <p>
-            <span class="lang en">Support for apartments, rentals, move-out repairs, punch items, and recurring maintenance needs.</span>
-            <span class="lang es">Soporte para apartamentos, rentas, reparaciones de salida, detalles pendientes y mantenimiento recurrente.</span>
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY US -->
-  <section class="why-us section" id="why-us">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-tag">
-          <span class="lang en">Why Choose Us</span>
-          <span class="lang es">Por Qué Elegirnos</span>
-        </p>
-        <h2>
-          <span class="lang en">Built on Reliability, Communication, and Real Service</span>
-          <span class="lang es">Basados en Confiabilidad, Comunicación y Servicio Real</span>
-        </h2>
-      </div>
-
-      <div class="why-us-grid">
-        <div class="why-card">
-          <h3>
-            <span class="lang en">Professional Communication</span>
-            <span class="lang es">Comunicación Profesional</span>
-          </h3>
-          <p>
-            <span class="lang en">Clear updates, organized follow-up, and better communication throughout the process.</span>
-            <span class="lang es">Actualizaciones claras, seguimiento organizado y mejor comunicación durante todo el proceso.</span>
-          </p>
-        </div>
-
-        <div class="why-card">
-          <h3>
-            <span class="lang en">Fast Lead Response</span>
-            <span class="lang es">Respuesta Rápida</span>
-          </h3>
-          <p>
-            <span class="lang en">Service requests are received quickly and handled with a structured response process.</span>
-            <span class="lang es">Las solicitudes de servicio se reciben rápido y se manejan con un proceso organizado.</span>
-          </p>
-        </div>
-
-        <div class="why-card">
-          <h3>
-            <span class="lang en">Bilingual Attention</span>
-            <span class="lang es">Atención Bilingüe</span>
-          </h3>
-          <p>
-            <span class="lang en">We support both English and Spanish communication to make the process easier for more clients.</span>
-            <span class="lang es">Atendemos en inglés y español para hacer el proceso más fácil para más clientes.</span>
-          </p>
-        </div>
-
-        <div class="why-card">
-          <h3>
-            <span class="lang en">Local Service Area</span>
-            <span class="lang es">Cobertura Local</span>
-          </h3>
-          <p>
-            <span class="lang en">Serving Las Vegas, Henderson, and surrounding areas with practical and dependable solutions.</span>
-            <span class="lang es">Atendiendo Las Vegas, Henderson y áreas cercanas con soluciones prácticas y confiables.</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section class="gallery section" id="gallery">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-tag">
-          <span class="lang en">Our Work</span>
-          <span class="lang es">Nuestro Trabajo</span>
-        </p>
-        <h2>
-          <span class="lang en">Real Project Photos</span>
-          <span class="lang es">Fotos Reales de Proyectos</span>
-        </h2>
-        <p>
-          <span class="lang en">Use real work photos whenever possible to build trust with local customers.</span>
-          <span class="lang es">Usa fotos reales de tus trabajos siempre que sea posible para generar más confianza con clientes locales.</span>
-        </p>
-      </div>
-
-      <div class="gallery-grid">
-        <img src="assets/images/gallery/imagen2.jpg" alt="Project photo 1" loading="lazy" />
-        <img src="assets/images/gallery/imagen9.jpg" alt="Project photo 2" loading="lazy" />
-        <img src="assets/images/gallery/imagen10.jpg" alt="Project photo 3" loading="lazy" />
-        <img src="assets/images/gallery/imagen13.jpg" alt="Project photo 4" loading="lazy" />
-        <img src="assets/images/gallery/imagen14.jpg" alt="Project photo 5" loading="lazy" />
-        <img src="assets/images/gallery/imagen16.jpg" alt="Project photo 6" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- BEFORE / AFTER -->
-  <section class="before-after section" id="before-after">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-tag">
-          <span class="lang en">Before / After</span>
-          <span class="lang es">Antes / Después</span>
-        </p>
-        <h2>
-          <span class="lang en">See the Difference</span>
-          <span class="lang es">Mira la Diferencia</span>
-        </h2>
-        <p>
-          <span class="lang en">Show real transformations to help clients trust the quality of your work.</span>
-          <span class="lang es">Muestra transformaciones reales para que los clientes confíen en la calidad de tu trabajo.</span>
-        </p>
-      </div>
-
-      <div class="before-after-grid">
-        <article class="before-after-card">
-          <div class="ba-labels">
-            <span class="ba-label before">
-              <span class="lang en">Before</span>
-              <span class="lang es">Antes</span>
-            </span>
-            <span class="ba-label after">
-              <span class="lang en">After</span>
-              <span class="lang es">Después</span>
-            </span>
-          </div>
-
-          <div class="before-after-images">
-            <div class="ba-image">
-              <img src="assets/images/before-after/before1.jpg" alt="Before project 1" loading="lazy" />
-            </div>
-            <div class="ba-image">
-              <img src="assets/images/before-after/after1.jpg" alt="After project 1" loading="lazy" />
-            </div>
-          </div>
-
-          <p class="ba-caption">
-            <span class="lang en">Example transformation. Replace with your real before and after photos.</span>
-            <span class="lang es">Transformación de ejemplo. Reemplázala con tus fotos reales de antes y después.</span>
-          </p>
-        </article>
-
-        <article class="before-after-card">
-          <div class="ba-labels">
-            <span class="ba-label before">
-              <span class="lang en">Before</span>
-              <span class="lang es">Antes</span>
-            </span>
-            <span class="ba-label after">
-              <span class="lang en">After</span>
-              <span class="lang es">Después</span>
-            </span>
-          </div>
-
-          <div class="before-after-images">
-            <div class="ba-image">
-              <img src="assets/images/before-after/before2.jpg" alt="Before project 2" loading="lazy" />
-            </div>
-            <div class="ba-image">
-              <img src="assets/images/before-after/after2.jpg" alt="After project 2" loading="lazy" />
-            </div>
-          </div>
-
-          <p class="ba-caption">
-            <span class="lang en">You can use repairs, paint, maintenance, HVAC, or flooring examples here.</span>
-            <span class="lang es">Aquí puedes usar ejemplos de reparaciones, pintura, mantenimiento, HVAC o pisos.</span>
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section id="reviews" class="reviews-section">
-    <div class="reviews-container">
       <h2>
-        <span class="lang en">Trusted by Our Clients ⭐⭐⭐⭐⭐</span>
-        <span class="lang es">La Confianza de Nuestros Clientes ⭐⭐⭐⭐⭐</span>
+        <span class="lang en">Services We Handle</span>
+        <span class="lang es">Servicios que atendemos</span>
       </h2>
       <p>
-        <span class="lang en">Real reviews from satisfied customers in Las Vegas and nearby areas</span>
-        <span class="lang es">Reseñas reales de clientes satisfechos en Las Vegas y áreas cercanas</span>
+        <span class="lang en">From HVAC and electrical troubleshooting to plumbing, handyman work, and general maintenance, we handle the kind of service calls homes, rentals, and managed properties deal with every week.</span>
+        <span class="lang es">Desde HVAC y diagnósticos eléctricos hasta plomería, handyman y mantenimiento general, atendemos los tipos de servicios que casas, rentas y propiedades necesitan constantemente.</span>
       </p>
-
-      <div class="sk-ww-fb-page-reviews" data-embed-id="25672738"></div>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section class="contact section" id="contact">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-tag">
-          <span class="lang en">Request Service</span>
-          <span class="lang es">Solicitar Servicio</span>
-        </p>
-        <h2>
-          <span class="lang en">Tell Us What You Need</span>
-          <span class="lang es">Cuéntanos Qué Necesitas</span>
-        </h2>
-        <p>
-          <span class="lang en">Fill out the form below and we will review your request as soon as possible.</span>
-          <span class="lang es">Completa el formulario y revisaremos tu solicitud lo antes posible.</span>
-        </p>
+    <div class="services-grid">
+      <article class="service-card reveal">
+        <img src="assets/images/service/imagen15.jpg" alt="HVAC service work" loading="lazy" />
+        <h3><span class="lang en">HVAC Services</span><span class="lang es">Servicios HVAC</span></h3>
+        <p><span class="lang en">We help with cooling issues, airflow problems, system checks, maintenance, and the HVAC service calls that cannot be left waiting.</span><span class="lang es">Ayudamos con problemas de enfriamiento, flujo de aire, revisiones de sistema, mantenimiento y servicios de HVAC que no conviene dejar para después.</span></p>
+      </article>
+
+      <article class="service-card reveal">
+        <img src="assets/images/service/imagen3.jpg" alt="Electrical repair work" loading="lazy" />
+        <h3><span class="lang en">Electrical Support</span><span class="lang es">Soporte eléctrico</span></h3>
+        <p><span class="lang en">We handle common electrical issues involving outlets, switches, fixtures, breakers, and troubleshooting when something stops working the way it should.</span><span class="lang es">Atendemos problemas eléctricos comunes con contactos, apagadores, lámparas, breakers y diagnósticos cuando algo deja de funcionar como debe.</span></p>
+      </article>
+
+      <article class="service-card reveal">
+        <img src="assets/images/service/imagen21.jpg" alt="General maintenance work" loading="lazy" />
+        <h3><span class="lang en">General Maintenance</span><span class="lang es">Mantenimiento general</span></h3>
+        <p><span class="lang en">We help with repairs, installations, adjustments, punch items, and general maintenance work for homes, rentals, and managed properties.</span><span class="lang es">Ayudamos con reparaciones, instalaciones, ajustes, detalles pendientes y tareas generales de mantenimiento para casas, rentas y propiedades administradas.</span></p>
+      </article>
+
+      <article class="service-card reveal">
+        <h3><span class="lang en">Plumbing Repairs</span><span class="lang es">Reparaciones de plomería</span></h3>
+        <p><span class="lang en">We take care of leaks, drains, toilets, fixtures, and other common plumbing issues with service that is straightforward and well communicated.</span><span class="lang es">Nos encargamos de fugas, drenajes, sanitarios, accesorios y otros problemas comunes de plomería con un servicio claro, directo y bien explicado.</span></p>
+      </article>
+
+      <article class="service-card reveal">
+        <h3><span class="lang en">Handyman Work</span><span class="lang es">Trabajos de handyman</span></h3>
+        <p><span class="lang en">This includes repairs, replacements, installations, touch-ups, and the small jobs that still need to be done carefully and finished well.</span><span class="lang es">Esto incluye reparaciones, reemplazos, instalaciones, retoques y esos trabajos pequeños que igual deben hacerse con cuidado y quedar bien terminados.</span></p>
+      </article>
+
+      <article class="service-card reveal">
+        <h3><span class="lang en">Property Maintenance</span><span class="lang es">Mantenimiento de propiedades</span></h3>
+        <p><span class="lang en">We also help with apartments, rentals, turns, move-out repairs, and recurring maintenance work where consistency matters.</span><span class="lang es">También ayudamos con apartamentos, rentas, turns, reparaciones de salida y trabajos recurrentes de mantenimiento donde la consistencia sí importa.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="why-us section" id="why-us">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-tag">
+        <span class="lang en">Why Choose Us</span>
+        <span class="lang es">Por qué elegirnos</span>
+      </p>
+      <h2>
+        <span class="lang en">Why People Feel Comfortable Working With Us</span>
+        <span class="lang es">Por qué la gente se siente cómoda trabajando con nosotros</span>
+      </h2>
+      <p>
+        <span class="lang en">Most people care about the same things: getting a response, understanding what is going on, and feeling like the work is being handled with professionalism.</span>
+        <span class="lang es">La mayoría de las personas valora lo mismo: recibir respuesta, entender qué está pasando y sentir que el trabajo se está manejando con profesionalismo.</span>
+      </p>
+    </div>
+
+    <div class="why-us-grid">
+      <div class="why-card reveal">
+        <h3><span class="lang en">Professional communication</span><span class="lang es">Comunicación profesional</span></h3>
+        <p><span class="lang en">We keep clients updated, explain what we see, and work to avoid confusion during the job.</span><span class="lang es">Mantenemos al cliente informado, explicamos lo que vemos y trabajamos para evitar confusiones durante el servicio.</span></p>
       </div>
 
-      <div class="contact-wrapper">
-        <div class="contact-info">
-          <h3>
-            <span class="lang en">Contact Information</span>
-            <span class="lang es">Información de Contacto</span>
-          </h3>
+      <div class="why-card reveal">
+        <h3><span class="lang en">Fast response</span><span class="lang es">Respuesta rápida</span></h3>
+        <p><span class="lang en">We do our best to respond quickly so people are not left waiting without an answer or an update.</span><span class="lang es">Hacemos lo posible por responder rápido para que nadie se quede esperando sin respuesta ni seguimiento.</span></p>
+      </div>
 
-          <p>
-            <strong>
-              <span class="lang en">Phone:</span>
-              <span class="lang es">Teléfono:</span>
-            </strong>
-            <a href="tel:7024434470">702-443-4470</a>
-          </p>
+      <div class="why-card reveal">
+        <h3><span class="lang en">Bilingual attention</span><span class="lang es">Atención bilingüe</span></h3>
+        <p><span class="lang en">Being able to communicate in English or Spanish helps the job move faster, keeps expectations clear, and makes things easier for everyone.</span><span class="lang es">Poder comunicarnos en inglés o español ayuda a que el trabajo avance mejor, deja claras las expectativas y hace todo más fácil para todos.</span></p>
+      </div>
 
-          <p>
-            <strong>Email:</strong>
-            <a href="mailto:NextKeySolutionss@gmail.com">NextKeySolutionss@gmail.com</a>
-          </p>
+      <div class="why-card reveal">
+        <h3><span class="lang en">Our work, real results</span><span class="lang es">Trabajo real, resultados reales</span></h3>
+        <p><span class="lang en">We prefer to show examples so people can get a better idea of the kind of work we do and how we like things to be finished.</span><span class="lang es">Preferimos mostrar ejemplos reales para que la gente tenga una mejor idea del tipo de trabajo que hacemos.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <p>
-            <strong>
-              <span class="lang en">Service Area:</span>
-              <span class="lang es">Área de Servicio:</span>
-            </strong>
-            <span class="lang en">Las Vegas, Henderson, and surrounding areas</span>
-            <span class="lang es">Las Vegas, Henderson y áreas cercanas</span>
-          </p>
 
-          <p>
-            <strong>
-              <span class="lang en">Languages:</span>
-              <span class="lang es">Idiomas:</span>
-            </strong>
-            <span class="lang en">English / Spanish</span>
-            <span class="lang es">Inglés / Español</span>
-          </p>
+<section class="service-areas section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-tag"><span class="lang en">Service Area</span><span class="lang es">Área de servicio</span></p>
+      <h2><span class="lang en">Serving Las Vegas, Henderson, and Nearby Areas</span><span class="lang es">Atendemos Las Vegas, Henderson y zonas cercanas</span></h2>
+      <p><span class="lang en">We work with homeowners, rentals, apartments, and property-related service needs throughout Las Vegas, Henderson, and nearby areas.</span><span class="lang es">Trabajamos con propietarios, rentas, apartamentos y necesidades de servicio relacionadas con propiedades en Las Vegas, Henderson y áreas cercanas.</span></p>
+    </div>
+
+    <div class="why-us-grid">
+      <div class="why-card reveal">
+        <h3><span class="lang en">Residential Homes</span><span class="lang es">Casas residenciales</span></h3>
+        <p><span class="lang en">We help homeowners with repairs, troubleshooting, service calls, replacements, and everyday maintenance that needs to be handled without confusion.</span><span class="lang es">Ayudamos a propietarios con reparaciones, diagnósticos, visitas de servicio, reemplazos y mantenimiento del día a día que debe atenderse sin complicaciones.</span></p>
+      </div>
+      <div class="why-card reveal">
+        <h3><span class="lang en">Apartments & Rentals</span><span class="lang es">Apartamentos y rentas</span></h3>
+        <p><span class="lang en">We support rental units and managed properties with turns, punch work, common repairs, and recurring maintenance where timing and communication matter.</span><span class="lang es">Apoyamos unidades de renta y propiedades administradas con turns, punch work, reparaciones comunes y mantenimiento recurrente donde el tiempo y la comunicación sí importan.</span></p>
+      </div>
+      <div class="why-card reveal">
+        <h3><span class="lang en">Bilingual Communication</span><span class="lang es">Comunicación bilingüe</span></h3>
+        <p><span class="lang en">Clear coordination in English or Spanish helps reduce delays and keeps the service process easier to manage.</span><span class="lang es">La coordinación clara en inglés o español ayuda a reducir retrasos y hace el proceso más fácil de manejar.</span></p>
+      </div>
+      <div class="why-card reveal">
+        <h3><span class="lang en">Flexible Support</span><span class="lang es">Soporte flexible</span></h3>
+        <p><span class="lang en">Whether it is a one-time repair or recurring maintenance, we adapt to the type of property, the condition of the space, and the work that needs to be done.</span><span class="lang es">Ya sea una reparación puntual o mantenimiento recurrente, nos adaptamos al tipo de propiedad, a la condición del espacio y al trabajo que se necesita hacer.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-section">
+  <div class="reviews-container reveal">
+    <h2>
+      <span class="lang en">What Our Clients Are Saying ⭐⭐⭐⭐⭐</span>
+      <span class="lang es">Lo que dicen nuestros clientes ⭐⭐⭐⭐⭐</span>
+    </h2>
+    <p>
+      <span class="lang en">Reviews from clients who have trusted us with work in Las Vegas and nearby areas.</span>
+      <span class="lang es">Reseñas de clientes que han confiado en nosotros en Las Vegas y zonas cercanas.</span>
+    </p>
+    <div class="sk-ww-fb-page-reviews" data-embed-id="25672738"></div>
+  </div>
+</section>
+
+<section class="contact section" id="contact">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-tag"><span class="lang en">Request Service</span><span class="lang es">Solicitar servicio</span></p>
+      <h2><span class="lang en">Tell Us About the Job</span><span class="lang es">Cuéntanos sobre el trabajo</span></h2>
+      <p><span class="lang en">Send us the basic details and we will review the request as soon as possible.</span><span class="lang es">Envíanos los datos básicos y revisaremos la solicitud lo antes posible.</span></p>
+    </div>
+
+    <div class="contact-wrapper">
+      <div class="contact-info reveal reveal-left">
+        <h3><span class="lang en">Contact Information</span><span class="lang es">Información de contacto</span></h3>
+
+        <div class="contact-info-card">
+          <p><strong><span class="lang en">Phone:</span><span class="lang es">Teléfono:</span></strong> <a href="tel:7024434470">702-443-4470</a></p>
+          <p><strong>Email:</strong> <a href="mailto:NextKeySolutionss@gmail.com">NextKeySolutionss@gmail.com</a></p>
+          <p><strong><span class="lang en">Service Area:</span><span class="lang es">Área de servicio:</span></strong> <span class="lang en">Las Vegas, Henderson, and nearby areas</span><span class="lang es">Las Vegas, Henderson y áreas cercanas</span></p>
+          <p><strong><span class="lang en">Languages:</span><span class="lang es">Idiomas:</span></strong> <span class="lang en">English / Spanish</span><span class="lang es">Inglés / Español</span></p>
         </div>
 
-        <form id="serviceForm" class="service-form">
-          <div class="form-group">
-            <label for="fullName">
-              <span class="lang en">Full Name</span>
-              <span class="lang es">Nombre Completo</span>
-            </label>
-            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
-          </div>
+        <div class="contact-note">
+          <strong><span class="lang en">Need a quicker response?</span><span class="lang es">¿Necesitas una respuesta más rápida?</span></strong>
+          <p><span class="lang en">Call us or send a WhatsApp message. If you have photos, that usually helps us understand the issue faster.</span><span class="lang es">Llámanos o envíanos un mensaje por WhatsApp. Si tienes fotos, normalmente ayudan a entender el problema más rápido.</span></p>
+        </div>
+      </div>
 
-          <div class="form-group">
-            <label for="phone">
-              <span class="lang en">Phone Number</span>
-              <span class="lang es">Número de Teléfono</span>
-            </label>
-            <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
-          </div>
+      <form id="serviceForm" class="service-form reveal reveal-right" novalidate>
+        <div class="form-group">
+          <label for="fullName"><span class="lang en">Full Name</span><span class="lang es">Nombre completo</span></label>
+          <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
+        </div>
 
-          <div class="form-group">
-            <label for="email">
-              <span class="lang en">Email Address</span>
-              <span class="lang es">Correo Electrónico</span>
-            </label>
-            <input type="email" id="email" name="email" placeholder="Your email address" />
-          </div>
+        <div class="form-group">
+          <label for="phone"><span class="lang en">Phone Number</span><span class="lang es">Número de teléfono</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
+        </div>
 
-          <div class="form-group">
-            <label for="zipCode">
-              <span class="lang en">ZIP Code</span>
-              <span class="lang es">Código Postal</span>
-            </label>
-            <input type="text" id="zipCode" name="zipCode" placeholder="Your ZIP code" />
-          </div>
+        <div class="form-group">
+          <label for="email"><span class="lang en">Email Address</span><span class="lang es">Correo electrónico</span></label>
+          <input type="email" id="email" name="email" placeholder="Your email address" />
+        </div>
 
-          <div class="form-group">
-            <label for="serviceType">
-              <span class="lang en">Service Type</span>
-              <span class="lang es">Tipo de Servicio</span>
-            </label>
-            <select id="serviceType" name="serviceType" required>
-              <option value="">Select a service</option>
-              <option value="hvac">HVAC</option>
-              <option value="plumbing">Plumbing</option>
-              <option value="electrical">Electrical</option>
-              <option value="handyman">Handyman</option>
-              <option value="property-maintenance">Property Maintenance</option>
-              <option value="general">General Repair</option>
-            </select>
-          </div>
+        <div class="form-group">
+          <label for="zipCode"><span class="lang en">ZIP Code</span><span class="lang es">Código postal</span></label>
+          <input type="text" id="zipCode" name="zipCode" placeholder="Your ZIP code" />
+        </div>
 
-          <div class="form-group">
-            <label for="urgency">
-              <span class="lang en">How urgent is it?</span>
-              <span class="lang es">¿Qué tan urgente es?</span>
-            </label>
-            <select id="urgency" name="urgency">
-              <option value="">Select urgency</option>
-              <option value="low">Low</option>
-              <option value="normal">Normal</option>
-              <option value="urgent">Urgent</option>
-              <option value="emergency">Emergency</option>
-            </select>
-          </div>
+        <div class="form-group">
+          <label for="serviceType"><span class="lang en">Service Type</span><span class="lang es">Tipo de servicio</span></label>
+          <select id="serviceType" name="serviceType" required>
+            <option value="">Select a service</option>
+            <option value="hvac">HVAC</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="electrical">Electrical</option>
+            <option value="handyman">Handyman</option>
+            <option value="property-maintenance">Property Maintenance</option>
+            <option value="general">General Repair</option>
+          </select>
+        </div>
 
-          <div class="form-group">
-            <label for="preferredLanguage">
-              <span class="lang en">Preferred Language</span>
-              <span class="lang es">Idioma Preferido</span>
-            </label>
-            <select id="preferredLanguage" name="preferredLanguage">
-              <option value="">Select language</option>
-              <option value="english">English</option>
-              <option value="spanish">Spanish</option>
-            </select>
-          </div>
+        <div class="form-group">
+          <label for="urgency"><span class="lang en">How urgent is it?</span><span class="lang es">¿Qué tan urgente es?</span></label>
+          <select id="urgency" name="urgency">
+            <option value="">Select urgency</option>
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+          </select>
+        </div>
 
-          <div class="form-group">
-            <label for="message">
-              <span class="lang en">Describe the problem</span>
-              <span class="lang es">Describe el problema</span>
-            </label>
-            <textarea id="message" name="message" rows="6" placeholder="Tell us what is happening..." required></textarea>
-          </div>
+        <div class="form-group">
+          <label for="preferredLanguage"><span class="lang en">Preferred Language</span><span class="lang es">Idioma preferido</span></label>
+          <select id="preferredLanguage" name="preferredLanguage">
+            <option value="">Select language</option>
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+          </select>
+        </div>
 
-          <div class="form-group">
-            <label for="photos">
-              <span class="lang en">Upload Photos</span>
-              <span class="lang es">Subir Fotos</span>
-            </label>
-            <input type="file" id="photos" name="photos" multiple accept="image/*" />
-          </div>
+        <div class="form-group">
+          <label for="message"><span class="lang en">Describe the problem</span><span class="lang es">Describe el problema</span></label>
+          <textarea id="message" name="message" rows="6" placeholder="Tell us what is happening..." required></textarea>
+        </div>
 
-          <div class="form-group checkbox-group">
-            <input type="checkbox" id="contactConsent" name="contactConsent" required />
-            <label for="contactConsent">
-              <span class="lang en">I agree to be contacted regarding my service request.</span>
-              <span class="lang es">Acepto ser contactado con respecto a mi solicitud de servicio.</span>
-            </label>
-          </div>
+        <div class="form-group">
+          <label for="photos"><span class="lang en">Upload Photos</span><span class="lang es">Subir fotos</span></label>
+          <input type="file" id="photos" name="photos" multiple accept="image/*" />
+        </div>
 
-          <button type="submit" class="btn btn-primary" id="submitBtn">Submit Request</button>
-          
-          <h3>
-  <span class="lang en">Secure Payment</span>
-  <span class="lang es">Pago Seguro</span>
-</h3>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="contactConsent" name="contactConsent" required />
+          <label for="contactConsent">
+            <span class="lang en">I agree to be contacted regarding my service request.</span>
+            <span class="lang es">Acepto ser contactado con respecto a mi solicitud de servicio.</span>
+          </label>
+        </div>
 
-<p>
-  <span class="lang en">You can pay securely using your card.</span>
-  <span class="lang es">Puedes pagar de forma segura con tu tarjeta.</span>
-</p>
-          <div style="margin-top:25px;">
-  <stripe-buy-button
-    buy-button-id="TU_ID_DE_STRIPE"
-    publishable-key="TU_PUBLIC_KEY">
-  </stripe-buy-button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit Request</button>
+
+       <div class="payment-box">
+  <h3>
+    <span class="lang en">Secure Payment</span>
+    <span class="lang es">Pago seguro</span>
+  </h3>
+
+  <p class="payment-note">
+    <span class="lang en">If you need to make a payment, you can do it securely here through Stripe.</span>
+    <span class="lang es">Si necesitas hacer un pago, puedes hacerlo aquí de forma segura a través de Stripe.</span>
+  </p>
+
+  <div class="stripe-button-wrap">
+    <script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1TLvw7GhkplMn8ZgFd7yNHuz"
+  publishable-key="pk_live_51TLv9VGhkplMn8ZgV9sjSBo2tKnrvHTEfSUdnL8NBRYTIvRhNEXJKC2BQouucn1IEdc1WnVYfailnKCld0wstpR000GZuMHREp"
+>
+</stripe-buy-button>
+  </div>
 </div>
-          <p id="formStatus" class="form-status"></p>
-        </form>
-      </div>
+        <p id="formStatus" class="form-status" aria-live="polite"></p>
+      </form>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FAQ -->
-  <section class="faq section" id="faq">
-    <div class="container">
-      <div class="section-heading">
-        <p class="section-tag">FAQ</p>
-        <h2>
-          <span class="lang en">Frequently Asked Questions</span>
-          <span class="lang es">Preguntas Frecuentes</span>
-        </h2>
-      </div>
-
-      <div class="faq-list">
-        <article class="faq-item">
-          <h3>
-            <span class="lang en">What areas do you serve?</span>
-            <span class="lang es">¿Qué áreas cubren?</span>
-          </h3>
-          <p>
-            <span class="lang en">We serve Las Vegas, Henderson, and surrounding areas.</span>
-            <span class="lang es">Atendemos Las Vegas, Henderson y áreas cercanas.</span>
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>
-            <span class="lang en">Do you provide bilingual service?</span>
-            <span class="lang es">¿Ofrecen servicio bilingüe?</span>
-          </h3>
-          <p>
-            <span class="lang en">Yes, we assist clients in both English and Spanish.</span>
-            <span class="lang es">Sí, atendemos a clientes tanto en inglés como en español.</span>
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>
-            <span class="lang en">Can I send pictures of the issue?</span>
-            <span class="lang es">¿Puedo enviar fotos del problema?</span>
-          </h3>
-          <p>
-            <span class="lang en">Yes, the contact form allows you to upload photos to help us understand the problem better.</span>
-            <span class="lang es">Sí, el formulario de contacto te permite subir fotos para ayudarnos a entender mejor el problema.</span>
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>
-            <span class="lang en">Do you work with property managers and apartments?</span>
-            <span class="lang es">¿Trabajan con administradores de propiedades y apartamentos?</span>
-          </h3>
-          <p>
-            <span class="lang en">Yes, we can assist with residential properties, rentals, and property maintenance needs.</span>
-            <span class="lang es">Sí, podemos ayudar con propiedades residenciales, rentas y necesidades de mantenimiento de propiedades.</span>
-          </p>
-        </article>
-      </div>
+<section class="faq section" id="faq">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-tag">FAQ</p>
+      <h2><span class="lang en">Frequently Asked Questions</span><span class="lang es">Preguntas frecuentes</span></h2>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="cta section">
-    <div class="container cta-box">
-      <h2>
-        <span class="lang en">Need Reliable Service?</span>
-        <span class="lang es">¿Necesitas un Servicio Confiable?</span>
-      </h2>
-      <p>
-        <span class="lang en">Contact NextKeySolutions today and send us your service request.</span>
-        <span class="lang es">Contacta a NextKeySolutions hoy y envíanos tu solicitud de servicio.</span>
-      </p>
-      <div class="cta-buttons">
-        <a href="#contact" class="btn btn-primary">
-          <span class="lang en">Request Service</span>
-          <span class="lang es">Solicitar Servicio</span>
-        </a>
-        <a href="tel:7024434470" class="btn btn-secondary">
-          <span class="lang en">Call 702-443-4470</span>
-          <span class="lang es">Llama al 702-443-4470</span>
-        </a>
-      </div>
+    <div class="faq-list">
+      <article class="faq-item reveal">
+        <h3><span class="lang en">What areas do you serve?</span><span class="lang es">¿Qué áreas cubren?</span></h3>
+        <p><span class="lang en">We serve Las Vegas, Henderson, and nearby areas.</span><span class="lang es">Atendemos Las Vegas, Henderson y zonas cercanas.</span></p>
+      </article>
+
+      <article class="faq-item reveal">
+        <h3><span class="lang en">Do you provide bilingual service?</span><span class="lang es">¿Ofrecen servicio bilingüe?</span></h3>
+        <p><span class="lang en">Yes. We assist clients in both English and Spanish.</span><span class="lang es">Sí. Atendemos a clientes tanto en inglés como en español.</span></p>
+      </article>
+
+      <article class="faq-item reveal">
+        <h3><span class="lang en">Can I send photos of the issue?</span><span class="lang es">¿Puedo enviar fotos del problema?</span></h3>
+        <p><span class="lang en">Yes. The form allows photo uploads, and WhatsApp is also useful for faster visual reference.</span><span class="lang es">Sí. El formulario permite subir fotos, y WhatsApp también sirve para una referencia visual más rápida.</span></p>
+      </article>
+
+      <article class="faq-item reveal">
+        <h3><span class="lang en">Do you work with property managers and apartments?</span><span class="lang es">¿Trabajan con administradores y apartamentos?</span></h3>
+        <p><span class="lang en">Yes. We can assist with residential properties, rentals, apartments, and recurring maintenance needs.</span><span class="lang es">Sí. Podemos ayudar con propiedades residenciales, rentas, apartamentos y necesidades recurrentes de mantenimiento.</span></p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
+<section class="cta section">
+  <div class="container cta-box reveal reveal-zoom">
+    <h2><span class="lang en">Need help with a repair or service call?</span><span class="lang es">¿Necesitas ayuda con una reparación o servicio?</span></h2>
+    <p><span class="lang en">If you need help with a repair, maintenance issue, or service call, reach out and let us know what is going on.</span><span class="lang es">Si necesitas ayuda con una reparación, un tema de mantenimiento o una visita de servicio, escríbenos y cuéntanos qué está pasando.</span></p>
+    <div class="cta-buttons">
+      <a href="#contact" class="btn btn-primary"><span class="lang en">Request Service</span><span class="lang es">Solicitar servicio</span></a>
+      <a href="tel:7024434470" class="btn btn-secondary"><span class="lang en">Call 702-443-4470</span><span class="lang es">Llama al 702-443-4470</span></a>
+    </div>
+  </div>
+</section>
+
+
+  </main>
+
   <footer class="site-footer">
-    <div class="footer-qr">
+    <div class="footer-qr reveal">
       <p>
         <strong>
           <span class="lang en">Scan to contact us</span>
@@ -712,53 +475,50 @@
       <img src="assets/qr/nextkey-qr.svg" alt="NextKey QR Code" class="qr-code" loading="lazy" />
     </div>
 
-    <div class="container footer-container">
-      <div>
-        <h3>NextKeySolutions LLC</h3>
-        <p>
-          <span class="lang en">Professional repair and maintenance support in Las Vegas.</span>
-          <span class="lang es">Soporte profesional de reparación y mantenimiento en Las Vegas.</span>
-        </p>
-      </div>
 
-      <div>
-        <p><strong>Phone:</strong> 702-443-4470</p>
-        <p><strong>Email:</strong> NextKeySolutionss@gmail.com</p>
-      </div>
+<div class="container footer-container">
+  <div class="reveal">
+    <h3>NextKeySolutions LLC</h3>
+    <p><span class="lang en">HVAC, maintenance, repair, and property support in Las Vegas with clear bilingual communication and dependable service.</span><span class="lang es">Soporte de HVAC, mantenimiento, reparación y propiedades en Las Vegas con comunicación bilingüe clara y servicio confiable.</span></p>
+  </div>
 
-      <div>
-        <p>
-          <strong>
-            <span class="lang en">Languages:</span>
-            <span class="lang es">Idiomas:</span>
-          </strong>
-          <span class="lang en"> English / Spanish</span>
-          <span class="lang es"> Inglés / Español</span>
-        </p>
+  <div class="reveal">
+    <p><strong>Phone:</strong> 702-443-4470</p>
+    <p><strong>Email:</strong> NextKeySolutionss@gmail.com</p>
+  </div>
 
-        <p>
-          <strong>
-            <span class="lang en">Service Area:</span>
-            <span class="lang es">Área de servicio:</span>
-          </strong>
-          <span class="lang en">Las Vegas, Henderson, NV</span>
-          <span class="lang es">Las Vegas, Henderson, NV</span>
-        </p>
-      </div>
-    </div>
+  <div class="reveal">
+    <p>
+      <strong><span class="lang en">Languages:</span><span class="lang es">Idiomas:</span></strong>
+      <span class="lang en">English / Spanish</span>
+      <span class="lang es">Inglés / Español</span>
+    </p>
+
+    <p>
+      <strong><span class="lang en">Service Area:</span><span class="lang es">Área de servicio:</span></strong>
+      <span class="lang en">Las Vegas, Henderson, NV</span>
+      <span class="lang es">Las Vegas, Henderson, NV</span>
+    </p>
+  </div>
+</div>
+
+
   </footer>
 
-  <a
-    id="whatsappBtn"
-    target="_blank"
-    rel="noopener noreferrer"
-    style="display:inline-block;background:#25D366;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;"
-  >
-    Chat on WhatsApp
+<a
+id="whatsappBtn"
+target="_blank"
+rel="noopener noreferrer"
+class="whatsapp-float btn btn-whatsapp" aria-label="Chat on WhatsApp">
+    <span class="lang en">Chat on WhatsApp</span>
+    <span class="lang es">Chatear por WhatsApp</span>
   </a>
 
   <script src="app.js" defer></script>
+
   <script src="https://widgets.sociablekit.com/facebook-page-reviews/widget.js" defer></script>
+
   <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
 </body>
 </html>
